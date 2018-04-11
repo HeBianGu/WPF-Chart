@@ -1,0 +1,15 @@
+F:\WpfChartProgram\Product\Debug\WpfChartDemo.exe.config
+F:\WpfChartProgram\Product\Debug\WpfChartDemo.xml
+F:\WpfChartProgram\Product\Debug\WpfChartDemo.exe
+F:\WpfChartProgram\Product\Debug\WpfChartDemo.pdb
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\MainWindow.g.cs
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\App.g.cs
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo_MarkupCompile.cache
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo_MarkupCompile.lref
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\MainWindow.baml
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.g.resources
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.Properties.Resources.resources
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.csproj.GenerateResource.Cache
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.exe
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.pdb
+F:\WpfChartProgram\Source\Application\WpfChartDemo\obj\Debug\WpfChartDemo.csprojResolveAssemblyReference.cache
