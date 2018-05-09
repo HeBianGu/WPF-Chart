@@ -104,6 +104,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="ReadMe\说明.dgml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Generic.xaml">

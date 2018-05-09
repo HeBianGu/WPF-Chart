@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="CardiogramCurveChartPlotter" Category="Category9" Bounds="186.108200407152,220.960201716614,190.596666666667,25.24" />
+    <Node Id="CardiogramCurveEntitySource" Bounds="-43.3362640602747,128.654452209473,192.826666666667,25.24" UseManualLocation="True" />
+    <Node Id="ChartPlotter" Category="Category2" Bounds="237.166666666667,55.24,86.0933333333334,25.24" Label="ViewPlotter" />
+    <Node Id="ChartPlotter1" Category="Category2" Bounds="235.411666666667,110.48,89.6033333333334,25.24" Label="ChartPlotter" />
+    <Node Id="CirclePointMarker" Bounds="578.474934936508,47.6449690004463,122.72,25.24" UseManualLocation="True" />
+    <Node Id="CursorGraphLine.xaml" Category="Category10" Bounds="35.0891596984863,-43.7340180709931,146.56,25.24" UseManualLocation="True" />
+    <Node Id="CurveChartPlotter" Category="Category2" Bounds="218.855,165.72,122.716666666667,25.24" />
+    <Node Id="CurveEntitySource" Bounds="-135.672426198324,64.3486370361328,124.946666666667,25.24" UseManualLocation="True" />
+    <Node Id="ICurveEntitySource" Category="Category10" Bounds="72.2274942016602,54.9800047302246,128.473333333333,25.24" UseManualLocation="True" />
+    <Node Id="IMark" Category="Category10" Bounds="406.22749420166,55.9800047302246,53,25.24" UseManualLocation="True" />
+    <Node Id="Legend.xaml" Category="Category10" Bounds="411.755828857422,-26.5199938964844,92.5666666666667,25.24" UseManualLocation="True" />
+    <Node Id="LineLegendDetail.xaml" Bounds="-162.47084072113,-50.1324645698547,149.56,25.24" UseManualLocation="True" />
+    <Node Id="LineLegendItem.xaml" Bounds="565.863149643566,-68.3179503614801,142.17,25.24" UseManualLocation="True" />
+    <Node Id="PlotterBase" Category="Category1" Bounds="237.7,0,85.0266666666666,25.24" />
+    <Node Id="PlotterBaseStyle.xaml" Bounds="208.981906738281,-98.9741180709931,142.82,25.24" UseManualLocation="True" />
+    <Node Id="StaticCurveChartPlotter" Category="Category9" Bounds="1.68153374048515,220.95999420166,154.426666666667,25.24" />
+    <Node Id="T5PointMarker" Bounds="554.334727376302,102.965755389811,104.813333333333,25.24" UseManualLocation="True" />
+    <Node Id="ToolTip移动标记" Category="Comment" Bounds="-17.4184501523196,-119.190079883635,111.07,25.24" UseManualLocation="True" />
+    <Node Id="TrianglePointMarker" Bounds="445.105748291016,160.792442730713,137.26,25.24" UseManualLocation="True" />
+    <Node Id="三角形符号" Category="Comment" Bounds="592.49697163437,235.556645033112,80,25.24" UseManualLocation="True" />
+    <Node Id="五角形符号" Category="Comment" Bounds="661.845955452681,158.205855389811,80,25.24" UseManualLocation="True" />
+    <Node Id="其他扩展..." Bounds="446.755828857422,224.480006103516,76.67,25.24" UseManualLocation="True" />
+    <Node Id="图例" Category="Comment" Bounds="500.031659876621,-133.41551246175,50,25.24" UseManualLocation="True" />
+    <Node Id="心电图数据实体" Category="Comment" Bounds="-157.212973271216,199.103974051692,104,25.24" UseManualLocation="True" />
+    <Node Id="所有曲线、点、标记、绘图区域模板等的样式" Category="Comment" Bounds="157.732188465724,-175.202720659964,248,40.48" UseManualLocation="True" />
+    <Node Id="普通曲线数据实体" Category="Comment" Bounds="-240.014358520508,119.588737036133,116,25.24" UseManualLocation="True" />
+    <Node Id="曲线数据" Category="Comment" Bounds="-116.107385635376,5.10763543014527,68,25.24" UseManualLocation="True" />
+    <Node Id="曲线标识符号" Category="Comment" Bounds="676.071350097656,-12.1887608253479,92,25.24" UseManualLocation="True" />
+    <Node Id="环行符号" Category="Comment" Bounds="732.084028807125,95.9695878603571,68,25.24" Label="环形符号" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="ChartPlotter" Target="ChartPlotter1" Bounds="280.213340759277,80.4799017166138,0,21.0001" />
+    <Link Source="ChartPlotter1" Target="CurveChartPlotter" Bounds="280.213331472509,135.720001716614,5.80078773282366E-06,21.0001000000003" />
+    <Link Source="CursorGraphLine.xaml" Target="LineLegendDetail.xaml" Bounds="-3.91562963128747,-34.7784489658145,39.0047874224252,1.27292663376066" />
+    <Link Source="CursorGraphLine.xaml" Target="PlotterBase" Bounds="157.956948536672,-18.4940193939209,71.2469640115566,18.1322190867481" />
+    <Link Source="CurveChartPlotter" Target="CardiogramCurveChartPlotter" Bounds="280.485922544823,190.960101716614,0.453655890226571,21.0021988632714" />
+    <Link Source="CurveChartPlotter" Target="StaticCurveChartPlotter" Bounds="133.566895752693,190.960101716614,100.653600452692,27.6184017635163" />
+    <Link Source="CurveChartPlotter" Target="其他扩展..." Bounds="324.215338766882,190.960101716614,114.181231174111,32.7477547150735" />
+    <Link Source="ICurveEntitySource" Target="CardiogramCurveEntitySource" Bounds="74.1054101694014,80.2200047302246,48.0750316639843,42.4754154093443" />
+    <Link Source="ICurveEntitySource" Target="CurveEntitySource" Bounds="-1.73473114390477,70.4703680382493,73.962225345565,3.30494200319285" />
+    <Link Source="ICurveEntitySource" Target="PlotterBase" Bounds="169.45993676986,28.4549208686627,69.3514835868033,26.5250838615619" />
+    <Link Source="IMark" Target="CirclePointMarker" Bounds="459.22749420166,63.0963131373375,110.254720357639,4.43719950522762" />
+    <Link Source="IMark" Target="PlotterBase" Bounds="323.044479319393,28.3409422933124,83.18489218885,30.532947804484" />
+    <Link Source="IMark" Target="T5PointMarker" Bounds="459.22749420166,75.7553089537063,92.0863097456085,24.864360794249" />
+    <Link Source="IMark" Target="TrianglePointMarker" Bounds="442.481338173908,81.2200047302246,55.9968229436489,72.451426079762" />
+    <Link Source="Legend.xaml" Target="LineLegendItem.xaml" Bounds="504.097283748045,-41.03044191657,70.0691163059151,16.370031292661" />
+    <Link Source="Legend.xaml" Target="PlotterBase" Bounds="331.628214288148,-6.99759679189045,80.1276145692737,11.949714399733" />
+    <Link Source="PlotterBase" Target="ChartPlotter" Bounds="280.213328986475,25.2399998855591,5.80077011136382E-06,20.9999969100956" />
+    <Link Source="PlotterBaseStyle.xaml" Target="PlotterBase" Bounds="280.252334928547,-73.734118347168,0.116801258592488,64.7341328828014" />
+    <Link Source="ToolTip移动标记" Target="CursorGraphLine.xaml" Bounds="49.8662743233438,-93.9500798836353,40.6203747715243,43.6290340831753" />
+    <Link Source="三角形符号" Target="TrianglePointMarker" Bounds="541.398753076773,190.827241864482,71.0516149794214,44.7293938777053" />
+    <Link Source="五角形符号" Target="T5PointMarker" Bounds="636.251173635159,132.72607795666,43.8674594469497,25.4797774331511" />
+    <Link Source="图例" Target="Legend.xaml" Bounds="470.727608031176,-108.17551246175,46.3949707900083,74.0294007946009" />
+    <Link Source="心电图数据实体" Target="CardiogramCurveEntitySource" Bounds="-76.8576294672737,157.553966002461,93.3569506288761,41.5500101327924" />
+    <Link Source="所有曲线、点、标记、绘图区域模板等的样式" Target="PlotterBaseStyle.xaml" Bounds="280.814220502226,-134.72272277832,0.522568269119347,26.7503212177046" />
+    <Link Source="普通曲线数据实体" Target="CurveEntitySource" Bounds="-157.15472480202,93.6626001077752,51.0708611548595,25.9261369283576" />
+    <Link Source="曲线数据" Target="ICurveEntitySource" Bounds="-48.107385635376,25.4855553576321,120.488423338758,27.492339425036" />
+    <Link Source="曲线标识符号" Target="IMark" Bounds="467.987655306395,11.2660115875196,208.095260027265,49.0267780184815" />
+    <Link Source="环行符号" Target="CirclePointMarker" Bounds="681.210238033982,76.1022752587863,52.2047741299527,19.9825270086892" />
+  </Links>
+  <Categories>
+    <Category Id="Category1" Label="类别 1" Background="#FFE51400" IsTag="True" />
+    <Category Id="Category10" Label="类别 10" Background="#FF672878" IsTag="True" />
+    <Category Id="Category2" Label="类别 2" Background="#FF339933" IsTag="True" />
+    <Category Id="Category9" Label="类别 9" Background="#FF00539C" IsTag="True" />
+    <Category Id="Comment" Label="注释" Description="表示在图表中用户定义的注释" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="注释" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="背景" Description="背景色" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 10" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category10')" />
+      <Setter Property="Background" Value="#FF672878" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 9" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category9')" />
+      <Setter Property="Background" Value="#FF00539C" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 4" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category4')" />
+      <Setter Property="Background" Value="#FF1BA1E2" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 3" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category3')" />
+      <Setter Property="Background" Value="#FF3EBCED" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 2" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category2')" />
+      <Setter Property="Background" Value="#FF339933" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

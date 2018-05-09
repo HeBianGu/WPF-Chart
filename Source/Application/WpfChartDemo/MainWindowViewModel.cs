@@ -94,10 +94,6 @@ namespace WpfChartDemo
             }
             collection.Add(entity);
 
-            //ConvertTo(bodyMass[0], "身高(cm)", new CirclePointMarker());
-            //ConvertTo(bodyMass[1], "体重(kg)", new T5PointMarker());
-            //ConvertTo(bodyMass[2], "BMI(kg/㎡)", new TrianglePointMarker());
-
             this.Collection = collection;
 
         }
@@ -123,76 +119,6 @@ namespace WpfChartDemo
             {
                 _minValue = value;
                 RaisePropertyChanged("MinValue");
-            }
-        }
-        private void ButtonClickFunc(object obj)
-        {
-            string buttonName = obj as string;
-
-            switch (buttonName)
-            {
-                case "Case1":
-                    {
-
-                    }
-                    break;
-                case "Case2":
-                    {
-
-                    }
-                    break;
-                case "Case3":
-                    {
-
-                    }
-                    break;
-                case "Case4":
-                    {
-
-                    }
-                    break;
-                case "Case5":
-                    {
-
-                    }
-                    break;
-                case "Case6":
-                    {
-
-                    }
-                    break;
-                case "Case7":
-                    {
-
-                    }
-                    break;
-                case "Case8":
-                    {
-
-                    }
-                    break;
-                case "Case9":
-                    {
-
-                    }
-                    break;
-                case "Case10":
-                    {
-
-                    }
-                    break;
-                case "Case11":
-                    {
-
-                    }
-                    break;
-                case "Case12":
-                    {
-
-                    }
-                    break;
-                default:
-                    break;
             }
         }
     }
