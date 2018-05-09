@@ -24,6 +24,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace HeBianGu.WPF.EChart
@@ -40,6 +41,31 @@ namespace HeBianGu.WPF.EChart
 
         private void CurveChartPlotter_Loaded(object sender, RoutedEventArgs e)
         {
+            RefreshCurve();
+        }
+
+
+        public void Clear()
+        {
+            this.LeftCanvas.Children.Clear();
+
+            this.RightCanvas.Children.Clear();
+
+            this.BottomCanvas.Children.Clear();
+
+            this.TopCanvas.Children.Clear();
+
+            this.ParallelCanvas.Children.Clear();
+
+            this.ParallelBottomCanvas.Children.Clear();
+
+            this.PathCanvas.Children.Clear();
+        }
+        /// <summary> 刷新数据 </summary>
+        void RefreshCurve()
+        {
+            this.Clear();
+
             this.RefreshXYZoom();
 
             this.RefreshSplitItemY();
@@ -61,7 +87,7 @@ namespace HeBianGu.WPF.EChart
                     {
                         _graphLine.Refresh();
 
-                        this.RefreshXYZoom();
+                        //this.RefreshXYZoom();
                     }
                 };
             }
@@ -133,7 +159,7 @@ namespace HeBianGu.WPF.EChart
                 text.Foreground = item.Color;
                 Canvas.SetLeft(text, l.X2 - ParallelCanvas.ActualWidth);
                 Canvas.SetTop(text, this.GetY(item.Value) + p.Height / 2);
-                Canvas.SetLeft(l, - ParallelCanvas.ActualWidth);
+                Canvas.SetLeft(l, -ParallelCanvas.ActualWidth);
 
                 // Todo ：不隐藏 
                 this.RightCanvas.Children.Add(p);
@@ -236,13 +262,59 @@ namespace HeBianGu.WPF.EChart
         void RefreshXYZoom()
         {
             this.BottomCanvas.Children.Clear();
+
             this.LeftCanvas.Children.Clear();
 
             double param = 5;
 
             var ts = this.FindResource("XCenterLable") as Style;
             var tsright = this.FindResource("YRightLable") as Style;
-            var d = this.FindResource("dashCapline") as Style;
+            //var d = this.FindResource("dashCapline") as Style;
+
+
+            // Todo ：绘制轮廓 
+            Line xleft = new Line();
+            xleft.X1 = 0;
+            xleft.X2 = 0;
+            xleft.Y1 = 0;
+            xleft.Y2 = this.ParallelCanvas.ActualHeight;
+            xleft.Stroke = this.Foreground;
+            xleft.StrokeThickness = 1;
+            Canvas.SetLeft(xleft, 0);
+
+            Line xright = new Line();
+            xright.X1 = 0;
+            xright.X2 = 0;
+            xright.Y1 = 0;
+            xright.Y2 = this.ParallelCanvas.ActualHeight;
+            xright.Stroke = this.Foreground;
+            xright.StrokeThickness = 1;
+            Canvas.SetRight(xright, 0);
+
+            Line yleft = new Line();
+            yleft.X1 = 0;
+            yleft.X2 = this.ParallelCanvas.ActualWidth;
+            yleft.Y1 = 0;
+            yleft.Y2 = 0;
+            yleft.Stroke = this.Foreground;
+            yleft.StrokeThickness = 1;
+            Canvas.SetTop(yleft, 0);
+
+            Line yright = new Line();
+            yright.X1 = 0;
+            yright.X2 = this.ParallelCanvas.ActualWidth;
+            yright.Y1 = 0;
+            yright.Y2 = 0;
+            yright.Stroke = this.Foreground;
+            yright.StrokeThickness = 1;
+            Canvas.SetBottom(yright, 0);
+
+
+            this.ParallelCanvas.Children.Add(xleft);
+            this.ParallelCanvas.Children.Add(xright);
+            this.ParallelCanvas.Children.Add(yleft);
+            this.ParallelCanvas.Children.Add(yright);
+
 
             // Todo ：绘制X坐标轴 
             if (!this.IsAutoXAxis)
@@ -273,57 +345,60 @@ namespace HeBianGu.WPF.EChart
             }
             else
             {
-                List<Point> vs = new List<Point>();
+                //List<Point> vs = new List<Point>();
 
-                double minSpace = (this.MaxValueX - this.MinValueX) / AutoXAxisCount;
+                //double minSpace = (this.MaxValueX - this.MinValueX) / AutoXAxisCount;
 
-                // Todo ：按照实际值画坐标 
-                foreach (var item in this.DataSource)
-                {
-                    if (item.Visibility != Visibility.Visible) continue;
+                //// Todo ：按照实际值画坐标 
+                //foreach (var item in this.DataSource)
+                //{
+                //    if (item.Visibility != Visibility.Visible) continue;
 
-                    foreach (var c in item.Source)
-                    {
-                        // Todo ：存在在范围之内的不添加坐标 
-                        if (vs.Exists(k => Math.Abs(k.X - c.X) < minSpace)) continue;
+                //    foreach (var c in item.Source)
+                //    {
+                //        // Todo ：存在在范围之内的不添加坐标 
+                //        if (vs.Exists(k => Math.Abs(k.X - c.X) < minSpace)) continue;
 
-                        Line l = new Line();
-                        l.X1 = 0;
-                        l.X2 = 0;
-                        l.Y1 = 0;
-                        l.Y2 = param;
-                        l.Stroke = this.Foreground;
-                        Canvas.SetLeft(l, this.GetX(c.X));
-                        this.BottomCanvas.Children.Add(l);
+                //        Line l = new Line();
+                //        l.X1 = 0;
+                //        l.X2 = 0;
+                //        l.Y1 = 0;
+                //        l.Y2 = param;
+                //        l.Stroke = this.Foreground;
+                //        Canvas.SetLeft(l, this.GetX(c.X));
+                //        this.BottomCanvas.Children.Add(l);
 
-                        Label t = new Label();
-                        t.Content = c.Text;
-                        t.Style = ts;
-                        t.FontSize = this.FontSize - 3;
-                        Canvas.SetLeft(t, this.GetX(c.X) - t.Width / 2);
-                        Canvas.SetTop(t, 2 * param - t.Height / 2);
-                        this.BottomCanvas.Children.Add(t);
-                        
-                        // Todo ：增加虚线 
-                        Line lx = new Line();
-                        lx.X1 = 0;
-                        lx.X2 = 0;
-                        lx.Y1 = this.GetY(0) - this.ParallelCanvas.ActualHeight/2-this.BottomCanvas.ActualHeight;
-                        lx.Y2 = this.GetY(c.Y);
-                        lx.Style = d;
-                        lx.Stroke = this.Foreground;
-                        lx.StrokeThickness = 0.5;
-                        Canvas.SetLeft(lx, this.GetX(c.X));
-                        Canvas.SetTop(lx, -this.ParallelCanvas.ActualHeight);
+                //        Label t = new Label();
+                //        t.Content = c.Text;
+                //        t.Style = ts;
+                //        t.FontSize = this.FontSize - 3;
+                //        Canvas.SetLeft(t, this.GetX(c.X) - t.Width / 2);
+                //        Canvas.SetTop(t, 2 * param - t.Height / 2);
+                //        this.BottomCanvas.Children.Add(t);
 
-                        if(lx.Y1>lx.Y2)
-                        {
-                            this.BottomCanvas.Children.Add(lx);
-                        }
+                //        // Todo ：增加虚线 
+                //        Line lx = new Line();
+                //        lx.X1 = 0;
+                //        lx.X2 = 0;
+                //        lx.Y1 = this.ParallelCanvas.ActualHeight - this.GetY(c.Y);
+                //        lx.Y2 = 0;
+                //        lx.Style = d;
+                //        lx.Stroke = this.Foreground;
+                //        lx.StrokeThickness = 0.5;
+                //        Canvas.SetLeft(lx, this.GetX(c.X));
+                //        Canvas.SetBottom(lx, 0);
 
-                        vs.Add(c.ToPoint());
-                    }
-                }
+                //        if (lx.Y1 > lx.Y2)
+                //        {
+                //            this.ParallelCanvas.Children.Add(lx);
+
+                //            item.ValueLines.Add(lx);
+                //        }
+
+
+                //        vs.Add(c.ToPoint());
+                //    }
+                //}
             }
 
             //Y坐标
@@ -438,24 +513,31 @@ namespace HeBianGu.WPF.EChart
         #endregion
 
         #region - 依赖属性 -
-        //public List<CurveEntitySource> DataSource
-        //{
-        //    get { return (List<CurveEntitySource>)GetValue(DataSourceProperty); }
-        //    set { SetValue(DataSourceProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for DataSource.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty DataSourceProperty =
-        //    DependencyProperty.Register("DataSource", typeof(List<CurveEntitySource>), typeof(CurveChartPlotter), new PropertyMetadata(new List<CurveEntitySource>()));
-
-        private List<ICurveEntitySource> _dataSource = new List<ICurveEntitySource>();
-        /// <summary> 说明 </summary>
         public List<ICurveEntitySource> DataSource
         {
-            get { return _dataSource; }
-            set { _dataSource = value; }
+            get { return (List<ICurveEntitySource>)GetValue(DataSourceProperty); }
+            set { SetValue(DataSourceProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for DataSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DataSourceProperty =
+            DependencyProperty.Register("DataSource", typeof(List<ICurveEntitySource>), typeof(CurveChartPlotter), new PropertyMetadata(new List<ICurveEntitySource>(), PropertyChangedCallback));
+
+
+        static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control
+                = d as CurveChartPlotter;
+
+            if (control.IsLoaded)
+            {
+                control.RefreshCurve();
+
+                control.BeginStory();
+            }
+
+        }
+ 
 
         /// <summary> 是否启用图例 </summary>
         public bool IsLegendVisible
@@ -551,9 +633,6 @@ namespace HeBianGu.WPF.EChart
             get { return _isShowCursorLine; }
             set { _isShowCursorLine = value; }
         }
-
-
-
 
         #endregion
     }

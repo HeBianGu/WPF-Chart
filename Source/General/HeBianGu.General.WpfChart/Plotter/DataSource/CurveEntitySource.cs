@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -43,11 +44,23 @@ namespace HeBianGu.WPF.EChart
             
             var ps = chart.FindResource("DefaultCurvePath") as Style;
             var ms = chart.FindResource("DefaultMarker") as Style;
-            
+
+            var ts = chart.FindResource("XCenterLable") as Style;
+            var d = chart.FindResource("dashCapline") as Style;
+
             Path path = new Path();
             path.Style = ps;
             path.Stroke = this.Color;
             PolyLineSegment pls = new PolyLineSegment();
+
+            List<Point> vs = new List<Point>();
+
+            double minSpace = (chart.MaxValueX - chart.MinValueX) / chart.AutoXAxisCount;
+
+            double param = 5;
+
+            this.Elements.Clear();
+
             foreach (var item in this.Source)
             {
                 // Todo ：增加线 
@@ -64,16 +77,66 @@ namespace HeBianGu.WPF.EChart
                     m.Style = ms;
 
                     // Todo ：如果周边有小于5的值不显示文本
-                    var f = es.Find(l => Math.Abs(l.ScreenPoint.X - ptem.X) < _markTextVisbleLeight && Math.Abs(l.ScreenPoint.Y - ptem.Y) < _markTextVisbleLeight);
+                    var f = es.Find(k => Math.Abs(k.ScreenPoint.X - ptem.X) < _markTextVisbleLeight && Math.Abs(k.ScreenPoint.Y - ptem.Y) < _markTextVisbleLeight);
 
                     if (f != null && !string.IsNullOrEmpty(f.Text))
                     {
                         m.Text = string.Empty;
                     }
+
+
                     es.Add(m);
                 }
 
                 pls.Points.Add(ptem);
+
+                // Todo ：增加虚线 
+
+                // Todo ：存在在范围之内的不添加坐标 
+                if (vs.Exists(k => Math.Abs(k.X - item.X) < minSpace)) continue;
+
+                Line l = new Line();
+                l.X1 = 0;
+                l.X2 = 0;
+                l.Y1 = 0;
+                l.Y2 = param;
+                l.Stroke = chart.Foreground;
+                Canvas.SetLeft(l, chart.GetX(item.X));
+                chart.BottomCanvas.Children.Add(l);
+
+                this.Elements.Add(l);
+
+                Label t = new Label();
+                t.Content = item.Text;
+                t.Style = ts;
+                t.FontSize = chart.FontSize - 3;
+                Canvas.SetLeft(t, chart.GetX(item.X) - t.Width / 2);
+                Canvas.SetTop(t, 2 * param - t.Height / 2);
+                chart.BottomCanvas.Children.Add(t);
+
+                this.Elements.Add(t);
+
+                // Todo ：增加虚线 
+                Line lx = new Line();
+                lx.X1 = 0;
+                lx.X2 = 0;
+                lx.Y1 = chart.ParallelCanvas.ActualHeight - chart.GetY(item.Y);
+                lx.Y2 = 0;
+                lx.Style = d;
+                lx.Stroke = chart.Foreground;
+                lx.StrokeThickness = 0.5;
+                Canvas.SetLeft(lx, chart.GetX(item.X));
+                Canvas.SetBottom(lx, 0);
+
+                if (lx.Y1 > lx.Y2)
+                {
+                    chart.ParallelCanvas.Children.Add(lx);
+
+                    this.Elements.Add(lx);
+                }
+
+                vs.Add(item.ToPoint());
+
             }
 
             PathFigure pf = new PathFigure();
@@ -83,16 +146,17 @@ namespace HeBianGu.WPF.EChart
             path.Data = pg;
             chart.PathCanvas.Children.Add(path);
 
-            this.Elements.Clear();
+           
             this.Elements.Add(path);
+
             // Todo ：绘制Marker 
             foreach (var item in es)
             {
-                chart.ParallelCanvas.Children.Add(item);
+                chart.ParallelBottomCanvas.Children.Add(item);
+
                 this.Elements.Add(item);
             }
 
-          
         }
 
 

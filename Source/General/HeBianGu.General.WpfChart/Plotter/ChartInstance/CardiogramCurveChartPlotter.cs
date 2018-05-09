@@ -54,25 +54,25 @@ namespace HeBianGu.WPF.EChart
         /// <summary> 此方法的说明 </summary>
         public void RunDemo()
         {
-            CardiogramCurveEntitySource source = new CardiogramCurveEntitySource();
+            //CardiogramCurveEntitySource source = new CardiogramCurveEntitySource();
 
-            source.Color = this.Foreground;
+            //source.Color = this.Foreground;
 
-            Random r = new Random();
+            //Random r = new Random();
 
-            // Todo ：初始化X网线 
-            for (double i = this.MinValueX; i < this.MaxValueX; i = i + 0.1)
-            {
-                PointC p = new PointC();
+            //// Todo ：初始化X网线 
+            //for (double i = this.MinValueX; i < this.MaxValueX; i = i + 0.1)
+            //{
+            //    PointC p = new PointC();
 
-                p.Y = r.Next(1800, 2500);
-                p.X = i;
+            //    p.Y = r.Next(1800, 2500);
+            //    p.X = i;
 
-                source.Source.Add(p);
+            //    source.Source.Add(p);
 
-            }
+            //}
 
-            this.DataSource.Add(source);
+            //this.DataSource.Add(source);
         }
 
         private bool _isShowX;

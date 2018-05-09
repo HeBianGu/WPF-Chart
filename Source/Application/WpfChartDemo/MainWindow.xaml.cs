@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeBianGu.WPF.EChart;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace WpfChartDemo
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        MainWindowViewModel _vm = new MainWindowViewModel();
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = _vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            List<ICurveEntitySource> collection = new List<ICurveEntitySource>();
+            _vm.MinValue = 0;
+            _vm.MaxValue = 10;
+            _vm.Collection = collection;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            _vm.RefreshCurveData();
         }
     }
 }

@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace HeBianGu.WPF.EChart
 {
@@ -80,21 +81,43 @@ namespace HeBianGu.WPF.EChart
         }
 
 
-        private double _maxValueX;
-        /// <summary> 要显示的最大值 </summary>
-        public double MaxValueX
-        {
-            get { return _maxValueX; }
-            set { _maxValueX = value; }
-        }
+        //private double _maxValueX;
+        ///// <summary> 要显示的最大值 </summary>
+        //public double MaxValueX
+        //{
+        //    get { return _maxValueX; }
+        //    set { _maxValueX = value; }
+        //}
 
-        private double _minValueX;
-        /// <summary> 要显示的最小值 </summary>
+        //private double _minValueX;
+        ///// <summary> 要显示的最小值 </summary>
+        //public double MinValueX
+        //{
+        //    get { return _minValueX; }
+        //    set { _minValueX = value; }
+        //}
+
         public double MinValueX
         {
-            get { return _minValueX; }
-            set { _minValueX = value; }
+            get { return (double)GetValue(MinValueXProperty); }
+            set { SetValue(MinValueXProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for MinValueX.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinValueXProperty =
+            DependencyProperty.Register("MinValueX", typeof(double), typeof(ChartPlotter), new PropertyMetadata(0.0));
+
+
+
+        public double MaxValueX
+        {
+            get { return (double)GetValue(MaxValueXProperty); }
+            set { SetValue(MaxValueXProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxValueX.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxValueXProperty =
+            DependencyProperty.Register("MaxValueX", typeof(double), typeof(ChartPlotter), new PropertyMetadata(0.0));
 
 
         private List<SplitItem> _splitItemYs = new List<SplitItem>();
@@ -128,6 +151,10 @@ namespace HeBianGu.WPF.EChart
 
 
         #endregion
+
+
+   
+
 
     }
 

@@ -22,6 +22,18 @@
             Application Entry Point.
             </summary>
         </member>
+        <member name="T:WpfChartDemo.MainWindowViewModel">
+            <summary> 说明 </summary>
+        </member>
+        <member name="P:WpfChartDemo.MainWindowViewModel.Collection">
+            <summary> 曲线图数据 </summary>
+        </member>
+        <member name="P:WpfChartDemo.MainWindowViewModel.MaxValue">
+            <summary> 说明 </summary>
+        </member>
+        <member name="P:WpfChartDemo.MainWindowViewModel.MinValue">
+            <summary> 说明 </summary>
+        </member>
         <member name="T:WpfChartDemo.MainWindow">
             <summary>
             MainWindow.xaml 的交互逻辑

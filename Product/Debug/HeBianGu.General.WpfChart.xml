@@ -104,12 +104,6 @@
         <member name="P:HeBianGu.WPF.EChart.ChartPlotter.MinValueY">
             <summary> 要显示的最小值 </summary>
         </member>
-        <member name="P:HeBianGu.WPF.EChart.ChartPlotter.MaxValueX">
-            <summary> 要显示的最大值 </summary>
-        </member>
-        <member name="P:HeBianGu.WPF.EChart.ChartPlotter.MinValueX">
-            <summary> 要显示的最小值 </summary>
-        </member>
         <member name="P:HeBianGu.WPF.EChart.ChartPlotter.SplitItemYs">
             <summary> Y范围分割线 </summary>
         </member>
@@ -158,6 +152,9 @@
         <member name="T:HeBianGu.WPF.EChart.CurveChartPlotter">
             <summary> 曲线图图表 </summary>
         </member>
+        <member name="M:HeBianGu.WPF.EChart.CurveChartPlotter.RefreshCurve">
+            <summary> 刷新数据 </summary>
+        </member>
         <member name="M:HeBianGu.WPF.EChart.CurveChartPlotter.RefreshSplitItemY">
             <summary> 刷新标尺线 </summary>
         </member>
@@ -184,9 +181,6 @@
         </member>
         <member name="M:HeBianGu.WPF.EChart.CurveChartPlotter.RefreshCursorGraph">
             <summary> 绘制浮动标尺线 </summary>
-        </member>
-        <member name="P:HeBianGu.WPF.EChart.CurveChartPlotter.DataSource">
-            <summary> 说明 </summary>
         </member>
         <member name="P:HeBianGu.WPF.EChart.CurveChartPlotter.IsLegendVisible">
             <summary> 是否启用图例 </summary>
@@ -439,6 +433,36 @@
             <summary>
               使用此强类型资源类，为所有资源查找
               重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace HeBianGu.WPF.EChart
 {
@@ -32,6 +33,8 @@ namespace HeBianGu.WPF.EChart
     [TemplatePart(Name = "PART_BottomCanvas", Type = typeof(Canvas))]
     [TemplatePart(Name = "PART_LeftCanvas", Type = typeof(Canvas))]
     [TemplatePart(Name = "PART_RightCanvas", Type = typeof(Canvas))]
+    [TemplatePart(Name = "PART_ParallelBottomCanvas", Type = typeof(Canvas))]
+    
     public abstract class PlotterBase : ContentControl
     {
         protected PlotterBase()
@@ -49,7 +52,7 @@ namespace HeBianGu.WPF.EChart
             Style = (Style)dict["DefaultPlotterStyle"];
 
             ApplyTemplate();
-
+            
             //// Todo ：初始化淡出初始效果 
             //parallelCanvas.OpacityMask = this.FindResource("WindowOpMack") as Brush;
         }
@@ -61,7 +64,7 @@ namespace HeBianGu.WPF.EChart
         Canvas _leftCanvas;
         Canvas _rightCanvas;
         Canvas parallelCanvas;
-
+        Canvas _parallelBottomCanvas;
         Canvas _pathCanvas;
         public Canvas ParallelCanvas { get => parallelCanvas; }
         public Canvas RightCanvas { get => _rightCanvas; set => _rightCanvas = value; }
@@ -69,6 +72,7 @@ namespace HeBianGu.WPF.EChart
         public Canvas BottomCanvas { get => _bottomCanvas; set => _bottomCanvas = value; }
         public Canvas TopCanvas { get => _topCanvas; set => _topCanvas = value; }
         public Canvas PathCanvas { get => _pathCanvas; set => _pathCanvas = value; }
+        public Canvas ParallelBottomCanvas { get => _parallelBottomCanvas; set => _parallelBottomCanvas = value; }
 
         public override void OnApplyTemplate()
         {
@@ -80,12 +84,29 @@ namespace HeBianGu.WPF.EChart
             RightCanvas = GetPart<Canvas>("PART_RightCanvas");
             TopCanvas = GetPart<Canvas>("PART_TopCanvas");
             PathCanvas = GetPart<Canvas>("PART_PathCanvas");
+            ParallelBottomCanvas = GetPart<Canvas>("PART_ParallelBottomCanvas");
         }
         private T GetPart<T>(string name)
         {
             return (T)Template.FindName(name, this);
         }
 
+
         #endregion
+
+        #region - 动画 -
+
+        protected void BeginStory()
+        {
+            DoubleAnimation double1 = new DoubleAnimation(0, this.PathCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
+            Storyboard storyboard = new Storyboard();
+            Storyboard.SetTarget(double1, this.PathCanvas);
+            Storyboard.SetTargetProperty(double1, new PropertyPath("Width"));
+            storyboard.Children.Add(double1);
+            storyboard.Begin();
+        }
+        #endregion
+
+
     }
 }

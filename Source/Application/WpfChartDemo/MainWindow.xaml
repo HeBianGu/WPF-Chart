@@ -14,27 +14,42 @@
                 <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush Color="#FF7A7A7A" x:Key="split_backcolor"/>
+            <SolidColorBrush Color="Green" x:Key="split_backcolor"/>
         </ResourceDictionary>
 
     </Window.Resources>
-
     <Grid>
-        <StackPanel>
+        <TabControl>
+            <TabItem Header="曲线视图">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="430*"/>
+                        <RowDefinition Height="39*"/>
+                        <RowDefinition Height="39*"/>
+                    </Grid.RowDefinitions>
 
-            <echart:StaticCurveChartPlotter x:Name="chart" FontSize="12" MaxValueY="160" MinValueY="60" MaxValueX="11" MinValueX="0"  IsLegendVisible="True" Height="400" Width="800">
-                <echart:StaticCurveChartPlotter.SplitItemYs>
-                    <echart:SplitItem Color="DarkGray" Value="160" Text="160 " ></echart:SplitItem>
-                    <echart:SplitItem Color="DarkGray" Value="140" Text="140 "></echart:SplitItem>
-                    <echart:SplitItem Color="{StaticResource split_backcolor}" Value="140"  Text="140 mmHg" SpliteType="HeighLight"/>
-                    <echart:SplitItem Color="DarkGray" Value="120" Text="120"></echart:SplitItem>
-                    <echart:SplitItem Color="DarkGray" Value="100" Text="100" ></echart:SplitItem>
-                    <echart:SplitItem Color="DarkGray" Value="80" Text="80" ></echart:SplitItem>
-                    <echart:SplitItem Color="{StaticResource split_backcolor}" Value="90"  Text="90 mmHg"  SpliteType="HeighLight"></echart:SplitItem>
-                    <echart:SplitItem Color="DarkGray" Value="60" Text="60 "></echart:SplitItem>
-                </echart:StaticCurveChartPlotter.SplitItemYs>
+                    <Button Content="清理数据" Click="Button_Click" Grid.Row="1"/>
+                    <Button Content="显示数据" Click="Button_Click_1" Grid.Row="2"/>
+                    <Viewbox>
+                        <echart:StaticCurveChartPlotter x:Name="chart" Background="White" DataSource="{Binding Collection}"
+                                            FontSize="12" MaxValueY="400" MinValueY="0" MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" 
+                                            IsLegendVisible="True" Height="200" Width="800">
+                            <!--MaxValueX="11" MinValueX="0"-->
+                            <echart:StaticCurveChartPlotter.SplitItemYs>
+                                <echart:SplitItem Color="DarkGray" Value="400" Text="400 " ></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="350" Text="350 " ></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="300" Text="300 "></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="250" Text="250"></echart:SplitItem>
+                                <echart:SplitItem Color="Red" Value="240"  Text="240 mmHg" SpliteType="HeighLight"/>
+                                <echart:SplitItem Color="DarkGray" Value="200" Text="200"></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="150" Text="150"></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="100" Text="100" ></echart:SplitItem>
+                                <echart:SplitItem Color="Green" Value="90"  Text="90 mmHg"  SpliteType="HeighLight"></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="50" Text="50 "></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="0" Text="0 "></echart:SplitItem>
+                            </echart:StaticCurveChartPlotter.SplitItemYs>
 
-                <echart:StaticCurveChartPlotter.DataSource>
+                            <!--<echart:StaticCurveChartPlotter.DataSource>
                     <echart:CurveEntitySource >
                         <echart:CurveEntitySource.Source>
                             <echart:PointC X="0" Y="110" Text="2018-01-01"/>
@@ -58,6 +73,12 @@
                             <echart:PointC X="11" Y="90" Text="2018-12-01"/>
                         </echart:CurveEntitySource.Source>
                         <echart:CurveEntitySource.Text>收缩压</echart:CurveEntitySource.Text>
+                        <echart:CurveEntitySource.Color>
+                            <SolidColorBrush Color="#1791E6"/>
+                        </echart:CurveEntitySource.Color>
+                        <echart:CurveEntitySource.Marker>
+                            <echart:T5PointMarker Fill="#1791E6"/>
+                        </echart:CurveEntitySource.Marker>
                     </echart:CurveEntitySource>
 
                     <echart:CurveEntitySource >
@@ -121,10 +142,16 @@
                             <echart:TrianglePointMarker Fill="Green"/>
                         </echart:CurveEntitySource.Marker>
                     </echart:CurveEntitySource>
-                </echart:StaticCurveChartPlotter.DataSource>
+                </echart:StaticCurveChartPlotter.DataSource>-->
 
-            </echart:StaticCurveChartPlotter>
 
-        </StackPanel>
+                        </echart:StaticCurveChartPlotter>
+                    </Viewbox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="心电图(待定)"/>
+            <TabItem Header="平面网格(待定)"/>
+            <TabItem Header="等值线(待定)"/>
+        </TabControl>
     </Grid>
 </Window>

@@ -71,7 +71,16 @@ namespace HeBianGu.General.WpfChart
                 con.Style = s;
 
                 this._items.Add(con);
-                this.content.Children.Add(item.Marker);
+
+                // ToEdit：2018-05-08 02:49:53 修改有父节点 
+                if (item.Marker.Parent != null)
+                {
+                    this.content.Children.Add(item.Marker.Clone());
+                }
+                else
+                {
+                    this.content.Children.Add(item.Marker);
+                }
                 this.stackPanel.Children.Add(con);
             }
             
@@ -102,6 +111,8 @@ namespace HeBianGu.General.WpfChart
             {
                 this.Visibility = Visibility.Hidden;return;
             }
+
+            this.Visibility = Visibility.Visible;
             // Todo ：检测设置是否只显示有效值
             Point mousePos = Mouse.GetPosition(this);
             double param = 5;

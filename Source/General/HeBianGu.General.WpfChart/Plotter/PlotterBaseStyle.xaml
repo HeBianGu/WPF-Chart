@@ -353,7 +353,7 @@
             </Grid.ColumnDefinitions>
 
             <!--曲线区域-->
-            <Canvas x:Name="PART_PathCanvas" Background="{TemplateBinding Background}" Width="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Grid.Column="1" Grid.Row="1"  ClipToBounds="True" HorizontalAlignment="Left">
+            <Canvas x:Name="PART_PathCanvas" Width="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Grid.Column="1" Grid.Row="1"  ClipToBounds="True" HorizontalAlignment="Left">
 
                 <Canvas.Triggers>
                     <EventTrigger RoutedEvent="Loaded">
@@ -366,37 +366,26 @@
                     </EventTrigger>
                 </Canvas.Triggers>
             </Canvas>
+
+            <!--网格区域-->
+            <Canvas x:Name="PART_ParallelBottomCanvas" Grid.Column="1" Grid.Row="1"  ClipToBounds="True"/>
             
             <!--网格区域-->
-            <Canvas x:Name="PART_ParallelCanvas" Grid.Column="1" Grid.Row="1"  ClipToBounds="True">
-                <!--Y轴左-->
-                <Line X1="0" X2="0" Y1="0" Y2="{Binding ElementName=PART_ParallelCanvas, Path= ActualHeight}" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Canvas.Left="0"></Line>
-                <!--Y轴右-->
-                <Line X1="0" X2="0" Y1="0" Y2="{Binding ElementName=PART_ParallelCanvas, Path= ActualHeight}" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Canvas.Right="0"></Line>
-
-                <!--X轴下-->
-                <Line X1="0" X2="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Y1="0" Y2="0" Stroke="{TemplateBinding Foreground}" StrokeThickness="1"  Canvas.Bottom="0" ></Line>
-
-                <!--X轴上-->
-                <Line X1="0" X2="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Y1="0" Y2="0" Stroke="{TemplateBinding Foreground}" StrokeThickness="1"  Canvas.Top="0" ></Line>
-            </Canvas>
-
-
-
+            <Canvas x:Name="PART_ParallelCanvas" Grid.Column="1" Grid.Row="1"  ClipToBounds="True"/>
+            
+            <!--横坐标标识-->
+            <Canvas x:Name="PART_BottomCanvas" Grid.Row="2" Grid.Column="1"/>
 
             <!--横坐标标识-->
-            <Canvas x:Name="PART_BottomCanvas" Grid.Row="2" Grid.Column="1"  Background="{TemplateBinding Background}"/>
-
-            <!--横坐标标识-->
-            <Canvas x:Name="PART_TopCanvas" Grid.Row="2" Grid.Column="1"  Background="{TemplateBinding Background}"/>
+            <Canvas x:Name="PART_TopCanvas" Grid.Row="2" Grid.Column="1"/>
 
             <!--纵坐标标识-->
-            <Canvas x:Name="PART_LeftCanvas"  Grid.Row="1" Grid.Column="0"  Background="{TemplateBinding Background}"/>
+            <Canvas x:Name="PART_LeftCanvas"  Grid.Row="1" Grid.Column="0" />
 
             <!--纵坐标标识-->
-            <Canvas x:Name="PART_RightCanvas" Visibility="{Binding is}"  Grid.Row="1" Grid.Column="2"  Background="{TemplateBinding Background}"/>
+            <Canvas x:Name="PART_RightCanvas" Visibility="{Binding is}"  Grid.Row="1" Grid.Column="2" />
 
-
+          
         </Grid>
         <!--<ControlTemplate.Triggers>
             <EventTrigger RoutedEvent="Loaded">
@@ -409,6 +398,17 @@
                         <DoubleAnimation From="0" To="{Binding ElementName=PART_PathCanvas,Path=ActualWidth}" BeginTime="0:0:01" Duration="0:0:01" Storyboard.TargetProperty="Width"/>
                     </Storyboard>
                 </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>-->
+
+        <!--<ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="RefreshStory">
+                --><!--<BeginStoryboard>
+                    <Storyboard   Storyboard.TargetName="PART_PathCanvas">
+                        <DoubleAnimation From="0" To="0"  Duration="0:0:01" Storyboard.TargetProperty="Width"/>
+                        <DoubleAnimation From="0" To="{Binding ElementName=PART_PathCanvas,Path=ActualWidth}" BeginTime="0:0:01" Duration="0:0:01" Storyboard.TargetProperty="Width"/>
+                    </Storyboard>
+                </BeginStoryboard>--><!--
             </EventTrigger>
         </ControlTemplate.Triggers>-->
     </ControlTemplate>

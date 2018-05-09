@@ -3,9 +3,9 @@
                     xmlns:local="clr-namespace:HeBianGu.WPF.EChart">
 
     <ControlTemplate x:Key="DefaultLineLegendDetailTemplate" TargetType="{x:Type local:LineLegendDetail}">
-        <Viewbox>
+        <Viewbox  Height="30">
             <Grid x:Name="g_all">
-                <Canvas x:Name="c_all" Height="30" Width="100">
+                <Canvas x:Name="c_all" Height="30" Width="150">
 
                     <Line X1="10" X2="30" Y1="15" Y2="15" StrokeThickness="3" Stroke="{TemplateBinding Color}"/>
                     
