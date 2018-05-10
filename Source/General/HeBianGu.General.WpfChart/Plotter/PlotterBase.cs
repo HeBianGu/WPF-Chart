@@ -98,7 +98,7 @@ namespace HeBianGu.WPF.EChart
 
         protected void BeginStory()
         {
-            DoubleAnimation double1 = new DoubleAnimation(0, this.PathCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
+            DoubleAnimation double1 = new DoubleAnimation(0, this.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
             Storyboard storyboard = new Storyboard();
             Storyboard.SetTarget(double1, this.PathCanvas);
             Storyboard.SetTargetProperty(double1, new PropertyPath("Width"));

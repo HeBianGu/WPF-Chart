@@ -21,7 +21,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace WpfChartDemo
@@ -45,9 +47,11 @@ namespace WpfChartDemo
         void Init()
         {
             RefreshCurveData();
+
+            this.RefreshCardiogramCurve();
         }
 
-       public  void RefreshCurveData()
+        public void RefreshCurveData()
         {
 
             List<ICurveEntitySource> collection = new List<ICurveEntitySource>();
@@ -63,7 +67,7 @@ namespace WpfChartDemo
             {
                 PointC point = new PointC();
                 point.X = i;
-                point.Y = i*i;
+                point.Y = i * i;
                 point.Text = DateTime.Now.AddDays(i).ToString("yyyy-MM-dd");
                 entity.Source.Add(point);
 
@@ -76,7 +80,7 @@ namespace WpfChartDemo
             entity = new CurveEntitySource();
             entity.Text = "重量(kg)";
             entity.Color = Brushes.Orange;
-            entity.Marker = new  T5PointMarker();
+            entity.Marker = new T5PointMarker();
 
             entity.Marker.Fill = Brushes.Orange;
 
@@ -84,7 +88,7 @@ namespace WpfChartDemo
             {
                 PointC point = new PointC();
                 point.X = i;
-                point.Y = (20-i) * (20 - i);
+                point.Y = (20 - i) * (20 - i);
                 point.Text = DateTime.Now.AddDays(i).ToString("yyyy-MM-dd");
                 entity.Source.Add(point);
 
@@ -121,6 +125,167 @@ namespace WpfChartDemo
                 RaisePropertyChanged("MinValue");
             }
         }
+
+        private List<ICurveEntitySource> _cardiogramCollection = new List<ICurveEntitySource>();
+        /// <summary> 心电图数据 </summary>
+        public List<ICurveEntitySource> CardiogramCollection
+        {
+            get { return _cardiogramCollection; }
+            set
+            {
+                _cardiogramCollection = value;
+                RaisePropertyChanged("CardiogramCollection");
+            }
+        }
+
+        public void RefreshCardiogramCurve()
+        {
+            this.StopFlag = false;
+            string str = Properties.Resources.心电图;
+
+            var collection = str.Split(',').ToList();
+
+            List<string> cache = new List<string>();
+
+            Action action = () =>
+              {
+                  for (int i = 0; i < collection.Count; i++)
+                  {
+                      cache.Add(collection[i]);
+
+                      if (this.StopFlag) break;
+
+                      if (i == collection.Count - 1)
+                      {
+                          // Todo ：触发显示 
+                          this.ShowLast(cache, 140, cache.Count);
+                          break;
+                      }
+
+                      if (i % 100 == 0)
+                      {
+                          Thread.Sleep(1000);
+                      }
+
+                      if (i % this._refreshCount == 0)
+                      {
+
+                          // Todo ：触发显示 
+                          this.ShowLast(cache, 100, this.ShowCount);
+
+                          Thread.Sleep(this.RefreshTime);
+                      }
+
+                  
+                  }
+
+                  this.StopFlag = false;
+              };
+
+            Task task = new Task(action);
+            task.Start();
+        }
+
+
+        private bool _stopFlag = false;
+        /// <summary> 说明 </summary>
+        public bool StopFlag
+        {
+            get { return _stopFlag; }
+            set
+            {
+                _stopFlag = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary> 刷新显示最后的几条 </summary>
+        public void ShowLast(List<string> collection, int xMargin = 100, int count = 300)
+        {
+
+            Func<int, double> convertFuncX = l =>
+            {
+                return ((double)l / count) * xMargin + (150 - xMargin) / 2;
+            };
+
+            Func<double, double> convertFuncY = l =>
+            {
+                return (50 * (l - 1848) + 0 * (2448 - l)) / (2448 - 1848);
+            };
+
+            int total = collection.Count;
+
+            int skip = total > count ? total - count : 0;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var cs = collection.Skip(skip).ToList();
+
+                List<ICurveEntitySource> collections = new List<ICurveEntitySource>();
+
+                CardiogramCurveEntitySource entity = new CardiogramCurveEntitySource();
+
+                for (int i = 0; i < cs.Count; i++)
+                {
+                    PointC point = new PointC();
+
+                    point.X = convertFuncX(i);
+
+                    double d;
+                    bool result = double.TryParse(cs[i], out d);
+                    if (result)
+                    {
+                        point.Y = convertFuncY(d);
+                        point.Text = DateTime.Now.AddDays(i).ToString("yyyy-MM-dd");
+                        entity.Source.Add(point);
+                    }
+                }
+
+                collections.Add(entity);
+
+                this.CardiogramCollection = collections;
+            });
+
+
+
+        }
+
+        private int _refreshTime = 500;
+        /// <summary> 说明 </summary>
+        public int RefreshTime
+        {
+            get { return _refreshTime; }
+            set
+            {
+                _refreshTime = value;
+                RaisePropertyChanged("RefreshTime");
+            }
+        }
+
+        private int _refreshCount = 50;
+        /// <summary> 说明 </summary>
+        public int RefreshCount
+        {
+            get { return _refreshCount; }
+            set
+            {
+                _refreshCount = value;
+                RaisePropertyChanged("RefreshCount");
+            }
+        }
+
+        private int _showCount = 300;
+        /// <summary> 说明 </summary>
+        public int ShowCount
+        {
+            get { return _showCount; }
+            set
+            {
+                _showCount = value;
+                RaisePropertyChanged("ShowCount");
+            }
+        }
+
     }
 
     partial class MainWindowViewModel : INotifyPropertyChanged

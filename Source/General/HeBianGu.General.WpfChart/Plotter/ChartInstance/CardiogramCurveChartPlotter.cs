@@ -30,9 +30,9 @@ namespace HeBianGu.WPF.EChart
 
         public CardiogramCurveChartPlotter()
         {
-            this.InitData();
+            //this.InitData();
 
-            this.RunDemo();
+            //this.RunDemo();
 
             this.Loaded += CardiogramCurveChartPlotter_Loaded;
         }
@@ -107,14 +107,15 @@ namespace HeBianGu.WPF.EChart
             //this.FontSize = 12;
             this.MaxValueY = 2448;
             this.MinValueY = 1848;
-            this.MaxValueX = 11;
+            this.MaxValueX = 10;
             this.MinValueX = 0;
             //this.Height = 150;
 
 
             int tempIndex = 0;
+
             // Todo ：初始化X网线 
-            for (double i = this.MinValueX; i <= this.MaxValueX; i = i + 0.25)
+            for (double i = this.MinValueX; i <= this.MaxValueX; i = i + 1)
             {
                 SplitItem s = new SplitItem();
                 s.Value = i;
@@ -125,6 +126,7 @@ namespace HeBianGu.WPF.EChart
                 s.SpliteType = param == 0 && this.IsShowX ? SplitItemType.Normal : SplitItemType.InnerOnly;
 
                 this.SlpitItemXs.Add(s);
+
                 tempIndex++;
             }
 
@@ -141,8 +143,9 @@ namespace HeBianGu.WPF.EChart
 
 
             tempIndex = 0;
+
             // Todo ：初始化Y网线 
-            for (double i = this.MinValueY; i <= this.MaxValueY; i = i + 30)
+            for (double i = this.MinValueY; i <= this.MaxValueY; i = i + 150)
             {
                 SplitItem s = new SplitItem();
                 s.Value = i;

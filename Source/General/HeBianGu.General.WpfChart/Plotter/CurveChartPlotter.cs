@@ -121,6 +121,7 @@ namespace HeBianGu.WPF.EChart
                 if (item.Color != null) l.Stroke = item.Color;
                 l.X2 = ParallelCanvas.ActualWidth;
                 l.Style = this.InnerVerticalLineStyle == null ? l.Style = t : this.InnerVerticalLineStyle;
+                l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
                 Canvas.SetTop(l, this.GetY(item.Value));
                 this.ParallelCanvas.Children.Add(l);
             }
@@ -135,6 +136,8 @@ namespace HeBianGu.WPF.EChart
                 l.Y1 = 0;
                 l.Y2 = 0;
                 if (item.Color != null) l.Stroke = item.Color;
+                l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
+
                 l.X2 = ParallelCanvas.ActualWidth + ParallelCanvas.ActualWidth / 100;
                 l.Style = d;
                 Canvas.SetTop(l, this.GetY(item.Value));
@@ -242,8 +245,8 @@ namespace HeBianGu.WPF.EChart
                 l.Y2 = ParallelCanvas.ActualHeight;
                 l.Stroke = item.Color;
                 l.X2 = 0;
-
                 l.Style = this.InnerHorizontalLineStyle == null ? l.Style = t : this.InnerHorizontalLineStyle;
+                l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
 
                 Canvas.SetLeft(l, this.GetX(item.Value));
                 this.ParallelCanvas.Children.Add(l);
@@ -524,6 +527,21 @@ namespace HeBianGu.WPF.EChart
             DependencyProperty.Register("DataSource", typeof(List<ICurveEntitySource>), typeof(CurveChartPlotter), new PropertyMetadata(new List<ICurveEntitySource>(), PropertyChangedCallback));
 
 
+
+        /// <summary> 数据源改变是否触发动画 </summary>
+        public bool DataSourceChangeBegionStory
+        {
+            get { return (bool)GetValue(DataSourceChangeBegionStoryProperty); }
+            set { SetValue(DataSourceChangeBegionStoryProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DataSourceChangeBegionStory.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DataSourceChangeBegionStoryProperty =
+            DependencyProperty.Register("DataSourceChangeBegionStory", typeof(bool), typeof(CurveChartPlotter), new PropertyMetadata(true));
+
+
+
+
         static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control
@@ -531,9 +549,14 @@ namespace HeBianGu.WPF.EChart
 
             if (control.IsLoaded)
             {
+
                 control.RefreshCurve();
 
-                control.BeginStory();
+                if (control.DataSourceChangeBegionStory)
+                {
+                    control.BeginStory();
+
+                }
             }
 
         }

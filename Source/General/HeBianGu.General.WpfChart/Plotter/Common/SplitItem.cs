@@ -19,12 +19,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace HeBianGu.WPF.EChart
 {
     /// <summary> 网格分割线 </summary>
-    public class SplitItem
+    public class SplitItem : FrameworkElement
     {
         private double _value;
         /// <summary> 值 </summary>
@@ -57,6 +58,20 @@ namespace HeBianGu.WPF.EChart
             get { return _spliteType; }
             set { _spliteType = value; }
         }
+
+
+
+        public Style LineStyle
+        {
+            get { return (Style)GetValue(LineStyleProperty); }
+            set { SetValue(LineStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LineStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineStyleProperty =
+            DependencyProperty.Register("LineStyle", typeof(Style), typeof(SplitItem), new PropertyMetadata(null));
+
+
     }
 
 

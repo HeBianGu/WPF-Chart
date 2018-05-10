@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,22 @@ namespace WpfChartDemo
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             _vm.RefreshCurveData();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+            this.btn_start.IsEnabled = false;
+            _vm.RefreshCardiogramCurve();
+
+           
+        }
+
+        private void btn_stop_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.StopFlag = true;
+
+            this.btn_start.IsEnabled = true;
         }
     }
 }
