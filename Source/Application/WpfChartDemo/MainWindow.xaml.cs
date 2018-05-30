@@ -60,5 +60,10 @@ namespace WpfChartDemo
 
             this.btn_start.IsEnabled = true;
         }
+
+        private void btn_print_Click(object sender, RoutedEventArgs e)
+        {
+            PrintProvider.PrintGrid(this.grid_all);
+        }
     }
 }

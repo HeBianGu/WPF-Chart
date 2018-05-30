@@ -24,7 +24,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace HeBianGu.WPF.EChart
@@ -47,6 +46,8 @@ namespace HeBianGu.WPF.EChart
 
         public void Clear()
         {
+            this.CenterBottomCanvas.Children.Clear();
+
             this.LeftCanvas.Children.Clear();
 
             this.RightCanvas.Children.Clear();
@@ -56,8 +57,7 @@ namespace HeBianGu.WPF.EChart
             this.TopCanvas.Children.Clear();
 
             this.ParallelCanvas.Children.Clear();
-
-            this.ParallelBottomCanvas.Children.Clear();
+            
 
             this.PathCanvas.Children.Clear();
         }
@@ -161,13 +161,27 @@ namespace HeBianGu.WPF.EChart
                 text.FontSize = this.FontSize;
                 text.Foreground = item.Color;
                 Canvas.SetLeft(text, l.X2 - ParallelCanvas.ActualWidth);
-                Canvas.SetTop(text, this.GetY(item.Value) + p.Height / 2);
+
+                if (item.IsShowTrangle)
+                {
+                    Canvas.SetTop(text, this.GetY(item.Value) + p.Height / 2);
+                }
+                else
+                {
+                    Canvas.SetTop(text, this.GetY(item.Value) - this.FontSize / 2);
+                }
+
                 Canvas.SetLeft(l, -ParallelCanvas.ActualWidth);
 
                 // Todo ：不隐藏 
-                this.RightCanvas.Children.Add(p);
-                this.RightCanvas.Children.Add(l);
-                this.RightCanvas.Children.Add(text);
+                if (item.IsShowTrangle)
+                {
+                    this.RightCanvas.Children.Add(p);
+                    this.RightCanvas.Children.Add(l);
+                }
+
+                if (item.IsShowText)
+                    this.RightCanvas.Children.Add(text);
             }
 
             if (hs.Count < 2) return;
@@ -195,29 +209,37 @@ namespace HeBianGu.WPF.EChart
 
             hs = hs.OrderByDescending(l => l.Value).ToList();
 
-            // Todo ：绘制蒙版 
-            for (int i = 0; i < hs.Count; i++)
+            var group = hs.GroupBy(l => l.Group);
+
+            foreach (var item in group)
             {
-                if (i == 0) continue;
+                var collection = item.ToList();
 
-                Rectangle r = new Rectangle();
-                r.Width = this.ParallelCanvas.ActualWidth;
-                var height = this.GetY(hs[i].Value) - this.GetY(hs[i - 1].Value);
-                if (height < 0) continue;
-                r.Height = height;
-                r.Fill = Brushes.Orange;
-                r.Style = rs;
+                // Todo ：绘制蒙版 
+                for (int i = 0; i < item.ToList().Count; i++)
+                {
+                    if (i == 0) continue;
 
-                Color color1 = (Color)ColorConverter.ConvertFromString(hs[i - 1].Color.ToString());
-                Color color2 = (Color)ColorConverter.ConvertFromString(hs[i].Color.ToString());
+                    Rectangle r = new Rectangle();
+                    r.Width = this.ParallelCanvas.ActualWidth;
+                    var height = this.GetY(collection[i].Value) - this.GetY(collection[i - 1].Value);
+                    if (height < 0) continue;
+                    r.Height = height;
+                    r.Fill = Brushes.Orange;
+                    r.Style = rs;
 
-                LinearGradientBrush brush = new LinearGradientBrush(color1, color2, new Point(0, 0), new Point(0, 1));
-                r.Fill = brush;
+                    Color color1 = (Color)ColorConverter.ConvertFromString(collection[i - 1].Color.ToString());
+                    Color color2 = (Color)ColorConverter.ConvertFromString(collection[i].Color.ToString());
 
-                Canvas.SetTop(r, this.GetY(hs[i - 1].Value));
+                    LinearGradientBrush brush = new LinearGradientBrush(color1, color2, new Point(0, 0), new Point(0, 1));
+                    r.Fill = brush;
 
-                this.ParallelCanvas.Children.Add(r);
+                    Canvas.SetTop(r, this.GetY(collection[i - 1].Value));
+
+                    this.ParallelCanvas.Children.Add(r);
+                }
             }
+
         }
 
         /// <summary> 刷新标尺线 </summary>
@@ -549,7 +571,6 @@ namespace HeBianGu.WPF.EChart
 
             if (control.IsLoaded)
             {
-
                 control.RefreshCurve();
 
                 if (control.DataSourceChangeBegionStory)
@@ -560,7 +581,7 @@ namespace HeBianGu.WPF.EChart
             }
 
         }
- 
+
 
         /// <summary> 是否启用图例 </summary>
         public bool IsLegendVisible

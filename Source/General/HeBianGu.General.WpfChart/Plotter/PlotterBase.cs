@@ -52,7 +52,7 @@ namespace HeBianGu.WPF.EChart
             Style = (Style)dict["DefaultPlotterStyle"];
 
             ApplyTemplate();
-            
+
             //// Todo ：初始化淡出初始效果 
             //parallelCanvas.OpacityMask = this.FindResource("WindowOpMack") as Brush;
         }
@@ -64,7 +64,7 @@ namespace HeBianGu.WPF.EChart
         Canvas _leftCanvas;
         Canvas _rightCanvas;
         Canvas parallelCanvas;
-        Canvas _parallelBottomCanvas;
+        Canvas _centerBottomCanvas;
         Canvas _pathCanvas;
         public Canvas ParallelCanvas { get => parallelCanvas; }
         public Canvas RightCanvas { get => _rightCanvas; set => _rightCanvas = value; }
@@ -72,7 +72,7 @@ namespace HeBianGu.WPF.EChart
         public Canvas BottomCanvas { get => _bottomCanvas; set => _bottomCanvas = value; }
         public Canvas TopCanvas { get => _topCanvas; set => _topCanvas = value; }
         public Canvas PathCanvas { get => _pathCanvas; set => _pathCanvas = value; }
-        public Canvas ParallelBottomCanvas { get => _parallelBottomCanvas; set => _parallelBottomCanvas = value; }
+        public Canvas CenterBottomCanvas { get => _centerBottomCanvas; set => _centerBottomCanvas = value; }
 
         public override void OnApplyTemplate()
         {
@@ -84,29 +84,55 @@ namespace HeBianGu.WPF.EChart
             RightCanvas = GetPart<Canvas>("PART_RightCanvas");
             TopCanvas = GetPart<Canvas>("PART_TopCanvas");
             PathCanvas = GetPart<Canvas>("PART_PathCanvas");
-            ParallelBottomCanvas = GetPart<Canvas>("PART_ParallelBottomCanvas");
+            CenterBottomCanvas = GetPart<Canvas>("PART_ParallelBottomCanvas");
         }
         private T GetPart<T>(string name)
         {
             return (T)Template.FindName(name, this);
         }
 
-
         #endregion
 
         #region - 动画 -
 
-        protected void BeginStory()
+        public void BeginStory()
         {
-            DoubleAnimation double1 = new DoubleAnimation(0, this.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
-            Storyboard storyboard = new Storyboard();
+            //this.PathCanvas.Width = 0;
+            //this.CenterBottomCanvas.Width = 0;
+
+     
+            Storyboard start1storyboard = new Storyboard();
+
+            DoubleAnimation start1 = new DoubleAnimation(0, 0, new Duration(TimeSpan.FromSeconds(1)));
+            Storyboard.SetTarget(start1, this.PathCanvas);
+            Storyboard.SetTargetProperty(start1, new PropertyPath("Width"));
+            start1storyboard.Children.Add(start1);
+
+            DoubleAnimation double1 = new DoubleAnimation(0, this.PathCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
+            double1.BeginTime = TimeSpan.FromSeconds(1);
             Storyboard.SetTarget(double1, this.PathCanvas);
             Storyboard.SetTargetProperty(double1, new PropertyPath("Width"));
-            storyboard.Children.Add(double1);
-            storyboard.Begin();
+            start1storyboard.Children.Add(double1);
+
+            start1storyboard.Begin();
+
+
+            Storyboard start2storyboard = new Storyboard();
+
+            DoubleAnimation start2 = new DoubleAnimation(0, 0, new Duration(TimeSpan.FromSeconds(1)));
+            Storyboard.SetTarget(start2, this.CenterBottomCanvas);
+            Storyboard.SetTargetProperty(start2, new PropertyPath("Width"));
+            start2storyboard.Children.Add(start2);
+
+            DoubleAnimation double2 = new DoubleAnimation(0, this.CenterBottomCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1.5)));
+            double2.BeginTime = TimeSpan.FromSeconds(1.5);
+            Storyboard.SetTarget(double2, this.CenterBottomCanvas);
+            Storyboard.SetTargetProperty(double2, new PropertyPath("Width"));
+            start2storyboard.Children.Add(double2);
+            start2storyboard.Begin();
+
+
         }
         #endregion
-
-
     }
 }

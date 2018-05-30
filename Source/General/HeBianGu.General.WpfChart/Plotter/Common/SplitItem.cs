@@ -59,8 +59,6 @@ namespace HeBianGu.WPF.EChart
             set { _spliteType = value; }
         }
 
-
-
         public Style LineStyle
         {
             get { return (Style)GetValue(LineStyleProperty); }
@@ -71,6 +69,39 @@ namespace HeBianGu.WPF.EChart
         public static readonly DependencyProperty LineStyleProperty =
             DependencyProperty.Register("LineStyle", typeof(Style), typeof(SplitItem), new PropertyMetadata(null));
 
+
+        public string Group
+        {
+            get { return (string)GetValue(GroupProperty); }
+            set { SetValue(GroupProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Group.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GroupProperty =
+            DependencyProperty.Register("Group", typeof(string), typeof(SplitItem), new PropertyMetadata(null));
+
+
+        public bool IsShowTrangle
+        {
+            get { return (bool)GetValue(IsShowTrangleProperty); }
+            set { SetValue(IsShowTrangleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsShowTrangle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsShowTrangleProperty =
+            DependencyProperty.Register("IsShowTrangle", typeof(bool), typeof(SplitItem), new PropertyMetadata(true));
+
+
+
+        public bool IsShowText
+        {
+            get { return (bool)GetValue(IsShowTextProperty); }
+            set { SetValue(IsShowTextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsShowText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsShowTextProperty =
+            DependencyProperty.Register("IsShowText", typeof(bool), typeof(SplitItem), new PropertyMetadata(true));
 
     }
 

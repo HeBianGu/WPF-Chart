@@ -21,7 +21,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace HeBianGu.WPF.EChart
 {
@@ -43,10 +42,10 @@ namespace HeBianGu.WPF.EChart
         /// <summary> 名称 </summary>
         string Text { get; set; }
 
+
         /// <summary> 是否可见 </summary>
         Visibility Visibility { get; set; }
 
-        List<UIElement> Elements { get; set; }
 
         event Action VisibleChanged;
 
@@ -119,11 +118,12 @@ namespace HeBianGu.WPF.EChart
                     }
                 }
 
-
+             
 
 
             }
         }
+
 
         Action _visibleChanged;
 

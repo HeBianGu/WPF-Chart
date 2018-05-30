@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:HeBianGu.WPF.EChart">
 
     <ControlTemplate x:Key="DefaultLineLegendDetailTemplate" TargetType="{x:Type local:LineLegendDetail}">
-        <Viewbox  Height="30">
+        <Viewbox Height="20">
             <Grid x:Name="g_all">
                 <Canvas x:Name="c_all" Height="30" Width="150">
 

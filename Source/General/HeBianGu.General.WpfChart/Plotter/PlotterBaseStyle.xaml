@@ -41,6 +41,20 @@
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 
+
+    <!--左向右渐显示动画-->
+    <Storyboard x:Key="Story_DownToUp">
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="425"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
     <!--X方向缩放显示动画-->
     <Storyboard x:Key="Story_ScaleX">
         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
@@ -133,9 +147,9 @@
             </Trigger>
 
 
-            <!--<EventTrigger RoutedEvent="Loaded">
+            <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard Storyboard="{StaticResource Story_UpToDown}" />
-            </EventTrigger>-->
+            </EventTrigger>
         </Style.Triggers>
     </Style>
 
@@ -280,6 +294,34 @@
         </Style.Triggers>
     </Style>
 
+    <!--X轴虚线线样式-->
+    <Style TargetType="{x:Type Line}" x:Key="XdashCapline">
+        <Setter Property="StrokeDashCap" Value="Triangle"/>
+        <Setter Property="StrokeDashArray" Value="5"/>
+        <Setter Property="StrokeThickness" Value="0.5"/>
+        <Setter Property="Stroke" Value="Black"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                <Setter Property="StrokeThickness" Value="1"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource Story_DownToUp}" />
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type TextBlock}" x:Key="xTextBlock">
         <Setter Property="RenderTransform">
             <Setter.Value>
@@ -355,7 +397,7 @@
             <!--曲线区域-->
             <Canvas x:Name="PART_PathCanvas" Width="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Grid.Column="1" Grid.Row="1"  ClipToBounds="True" HorizontalAlignment="Left">
 
-                <Canvas.Triggers>
+                <!--<Canvas.Triggers>
                     <EventTrigger RoutedEvent="Loaded">
                         <BeginStoryboard>
                             <Storyboard   Storyboard.TargetName="PART_PathCanvas">
@@ -364,15 +406,15 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
-                </Canvas.Triggers>
+                </Canvas.Triggers>-->
             </Canvas>
 
             <!--网格区域-->
-            <Canvas x:Name="PART_ParallelBottomCanvas" Grid.Column="1" Grid.Row="1"  ClipToBounds="True"/>
-            
+            <Canvas x:Name="PART_ParallelBottomCanvas"  Width="{Binding ElementName=PART_ParallelCanvas,Path=ActualWidth}" Grid.Column="1" Grid.Row="1"  ClipToBounds="True" HorizontalAlignment="Left"/>
+
             <!--网格区域-->
             <Canvas x:Name="PART_ParallelCanvas" Grid.Column="1" Grid.Row="1"  ClipToBounds="True"/>
-            
+
             <!--横坐标标识-->
             <Canvas x:Name="PART_BottomCanvas" Grid.Row="2" Grid.Column="1"/>
 
@@ -385,7 +427,7 @@
             <!--纵坐标标识-->
             <Canvas x:Name="PART_RightCanvas" Visibility="{Binding is}"  Grid.Row="1" Grid.Column="2" />
 
-          
+
         </Grid>
         <!--<ControlTemplate.Triggers>
             <EventTrigger RoutedEvent="Loaded">
@@ -403,12 +445,14 @@
 
         <!--<ControlTemplate.Triggers>
             <EventTrigger RoutedEvent="RefreshStory">
-                --><!--<BeginStoryboard>
+                -->
+        <!--<BeginStoryboard>
                     <Storyboard   Storyboard.TargetName="PART_PathCanvas">
                         <DoubleAnimation From="0" To="0"  Duration="0:0:01" Storyboard.TargetProperty="Width"/>
                         <DoubleAnimation From="0" To="{Binding ElementName=PART_PathCanvas,Path=ActualWidth}" BeginTime="0:0:01" Duration="0:0:01" Storyboard.TargetProperty="Width"/>
                     </Storyboard>
-                </BeginStoryboard>--><!--
+                </BeginStoryboard>-->
+        <!--
             </EventTrigger>
         </ControlTemplate.Triggers>-->
     </ControlTemplate>
@@ -417,7 +461,6 @@
     <Style x:Key="DefaultPlotterStyle" TargetType="{x:Type local:PlotterBase}">
         <Setter Property="Template" Value="{StaticResource DefaultPlotterTemplate}"/>
     </Style>
-
 
     <Style TargetType="{x:Type Line}" x:Key="CardiogramDashCapline">
         <!--<Setter Property="StrokeDashCap" Value="Triangle"/>
@@ -434,21 +477,25 @@
                 </TransformGroup>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                -->
+        <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+        <!--
                 <Setter Property="StrokeThickness" Value="1"/>
             </Trigger>
-            <!--<EventTrigger RoutedEvent="Loaded">
+            -->
+        <!--<EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard Storyboard="{StaticResource Story_ScaleY}" />
             </EventTrigger>-->
-        </Style.Triggers>
+        <!--
+        </Style.Triggers>-->
     </Style>
 
     <!--实线线样式-->
     <Style TargetType="{x:Type Line}" x:Key="CardiogramDefaltLine">
         <Setter Property="Stroke" Value="Red"/>
-        <Setter Property="StrokeThickness" Value="0.5"/>
+        <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TransformGroup>
@@ -460,15 +507,19 @@
             </Setter.Value>
         </Setter>
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                -->
+        <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+        <!--
                 <Setter Property="StrokeThickness" Value="1"/>
             </Trigger>
-            <!--<EventTrigger RoutedEvent="Loaded">
+            -->
+        <!--<EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard Storyboard="{StaticResource Story_ScaleY}" />
             </EventTrigger>-->
-        </Style.Triggers>
+        <!--
+        </Style.Triggers>-->
     </Style>
 
     <Style TargetType="{x:Type Path}" x:Key="CardiogramDefaultPath">
@@ -484,15 +535,20 @@
                 </TransformGroup>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                -->
+        <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+        <!--
                 <Setter Property="StrokeThickness" Value="0.5"/>
             </Trigger>
 
+            -->
+        <!--<EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard Storyboard="{StaticResource Story_UpToDown}" />
-            </EventTrigger>
-        </Style.Triggers>
+            </EventTrigger>-->
+        <!--
+        </Style.Triggers>-->
     </Style>
 
     <!--心电图样式-->
@@ -506,13 +562,6 @@
         <Setter Property="DataSourceChangeBegionStory" Value="False"/>
         <Setter Property="Template" Value="{StaticResource DefaultPlotterTemplate}"/>
     </Style>
-
-
-    <LinearGradientBrush x:Key="sss"  StartPoint ="0,0.5"  EndPoint ="1,0.5" >
-        <GradientStop  Color ="Yellow"  Offset ="0.5" ></GradientStop>
-        <GradientStop  Color ="LightBlue"  Offset ="0.7" ></GradientStop>
-    </LinearGradientBrush>
-
 
     <SolidColorBrush x:Key="MaxLineColor" Color="#FFFFFF"></SolidColorBrush>
 

@@ -17,7 +17,9 @@
 using HeBianGu.WPF.EChart;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -49,6 +51,32 @@ namespace WpfChartDemo
             RefreshCurveData();
 
             this.RefreshCardiogramCurve();
+
+
+        }
+
+        private double _left = 0.1;
+        /// <summary> 说明 </summary>
+        public double Left
+        {
+            get { return _left; }
+            set
+            {
+                _left = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double _right = 0.7;
+        /// <summary> 说明 </summary>
+        public double Right
+        {
+            get { return _right; }
+            set
+            {
+                _right = value;
+                RaisePropertyChanged();
+            }
         }
 
         public void RefreshCurveData()
@@ -138,9 +166,11 @@ namespace WpfChartDemo
             }
         }
 
+
         public void RefreshCardiogramCurve()
         {
             this.StopFlag = false;
+
             string str = Properties.Resources.心电图;
 
             var collection = str.Split(',').ToList();
@@ -155,14 +185,15 @@ namespace WpfChartDemo
 
                       if (this.StopFlag) break;
 
-                      if (i == collection.Count - 1)
-                      {
-                          // Todo ：触发显示 
-                          this.ShowLast(cache, 140, cache.Count);
-                          break;
-                      }
+                      //if (i == collection.Count - 1)
+                      //{
+                      //    // Todo ：触发显示 
+                      //    this.ShowLast(cache, 140, cache.Count);
 
-                      if (i % 100 == 0)
+                      //    break;
+                      //}
+
+                      if (i % 150 == 0)
                       {
                           Thread.Sleep(1000);
                       }
@@ -170,13 +201,18 @@ namespace WpfChartDemo
                       if (i % this._refreshCount == 0)
                       {
 
+                          //while (cache.Count < this.ShowCount)
+                          //{
+                          //    cache.Insert(0, "2048");
+                          //}
+
                           // Todo ：触发显示 
-                          this.ShowLast(cache, 100, this.ShowCount);
+                          this.ShowLast(cache, 150, this.ShowCount);
 
                           Thread.Sleep(this.RefreshTime);
                       }
 
-                  
+
                   }
 
                   this.StopFlag = false;
@@ -184,7 +220,10 @@ namespace WpfChartDemo
 
             Task task = new Task(action);
             task.Start();
-        }
+
+}
+
+
 
 
         private bool _stopFlag = false;
@@ -200,17 +239,24 @@ namespace WpfChartDemo
         }
 
         /// <summary> 刷新显示最后的几条 </summary>
-        public void ShowLast(List<string> collection, int xMargin = 100, int count = 300)
+        public void ShowLast(List<string> collection, int xMargin = 150, int count = 600)
         {
 
             Func<int, double> convertFuncX = l =>
             {
+                if (collection.Count < count)
+                {
+                    l = count - collection.Count + l;
+                }
+
                 return ((double)l / count) * xMargin + (150 - xMargin) / 2;
             };
 
             Func<double, double> convertFuncY = l =>
             {
-                return (50 * (l - 1848) + 0 * (2448 - l)) / (2448 - 1848);
+                //return (50 * (l - 1848) + 0 * (2448 - l)) / (2448 - 1848);
+
+                return ((l - 2048) / 150) * 10 + 50 / 2;
             };
 
             int total = collection.Count;
@@ -274,7 +320,7 @@ namespace WpfChartDemo
             }
         }
 
-        private int _showCount = 300;
+        private int _showCount = 750;
         /// <summary> 说明 </summary>
         public int ShowCount
         {
@@ -286,13 +332,104 @@ namespace WpfChartDemo
             }
         }
 
+
+
+        private void ButtonClickFunc(object obj)
+        {
+            string buttonName = obj as string;
+
+            switch (buttonName)
+            {
+                case "ValueChanged":
+                    {
+                        Debug.WriteLine("ValueChanged");
+
+                        string str = Properties.Resources.心电图;
+
+                        var collection = str.Split(',').ToList();
+
+                        // Todo ：开始位置 
+                        int start = (int)((this.Left) * collection.Count);
+
+                        // Todo ：结束位置 
+                        int end = (int)((this.Right) * collection.Count);
+
+                        var items = collection.Skip(start).Take(end - start).ToList();
+
+                        this.ShowLast(items, 140, items.Count);
+                    }
+                    break;
+                case "Case2":
+                    {
+
+                    }
+                    break;
+                case "Case3":
+                    {
+
+                    }
+                    break;
+                case "Case4":
+                    {
+
+                    }
+                    break;
+                case "Case5":
+                    {
+
+                    }
+                    break;
+                case "Case6":
+                    {
+
+                    }
+                    break;
+                case "Case7":
+                    {
+
+                    }
+                    break;
+                case "Case8":
+                    {
+
+                    }
+                    break;
+                case "Case9":
+                    {
+
+                    }
+                    break;
+                case "Case10":
+                    {
+
+                    }
+                    break;
+                case "Case11":
+                    {
+
+                    }
+                    break;
+                case "Case12":
+                    {
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     partial class MainWindowViewModel : INotifyPropertyChanged
     {
+        public RelayCommand RelayCommand { get; set; }
+
         public MainWindowViewModel()
         {
+            RelayCommand = new RelayCommand(new Action<object>(ButtonClickFunc));
+
             Init();
+
         }
 
         #region - MVVM -
@@ -307,4 +444,6 @@ namespace WpfChartDemo
 
         #endregion
     }
+    
+    
 }

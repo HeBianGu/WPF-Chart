@@ -4,6 +4,18 @@
         <name>WpfChartDemo</name>
     </assembly>
     <members>
+        <member name="T:WpfChartDemo.PrintProvider">
+            <summary> 打印支持类 </summary>
+        </member>
+        <member name="M:WpfChartDemo.PrintProvider.PrintGrid(System.Windows.Controls.Grid,System.Boolean)">
+            <summary> 打印表格 </summary>
+        </member>
+        <member name="T:WpfChartDemo.RelayCommand">
+            <summary> 带参数的命令 </summary>
+        </member>
+        <member name="M:WpfChartDemo.RelayCommand.op_Implicit(System.Action{System.Object})~WpfChartDemo.RelayCommand">
+            <summary> 隐式转换 </summary>
+        </member>
         <member name="T:WpfChartDemo.App">
             <summary>
             App.xaml 的交互逻辑
@@ -27,6 +39,12 @@
         </member>
         <member name="P:WpfChartDemo.MainWindowViewModel.Collection">
             <summary> 曲线图数据 </summary>
+        </member>
+        <member name="P:WpfChartDemo.MainWindowViewModel.Left">
+            <summary> 说明 </summary>
+        </member>
+        <member name="P:WpfChartDemo.MainWindowViewModel.Right">
+            <summary> 说明 </summary>
         </member>
         <member name="P:WpfChartDemo.MainWindowViewModel.MaxValue">
             <summary> 说明 </summary>
@@ -93,6 +111,28 @@
         <member name="P:WpfChartDemo.Properties.Resources.心电图___副本">
             <summary>
               查找类似 1973,1969,1970,1976,1984,1992,1995,1992,1987,1981,1975,1971,1970,1971,1976,1983,1988,1992,1996,2001,2006,2074,2083,2111,2160,2200,2219,2220,2222,2243,2260,2260,2256,2211,2129,2064,2031,2022,2022,2026,2044,2083,2106,2121,2128,2131,2129,2126,2123,2125,2121,2116,2113,2111,2107,2093,2073,2053,2037,2026,2017,2010,2013,2031,2058,2084,2106,2118,2125,2122,2106,2078,2040,1997,1953,1907,1858,1810,1766,1729,1697,1668,1637,1608,1581,1557,1535,1515,1499,1491,1493,1500,1510,1524,1543,1567,1596,1764,1820,1846,1846,1834,17 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="T:WpfApp10.SpaceSpliterUserControl">
+            <summary>
+            SpaceSpliterUserControl.xaml 的交互逻辑
+            </summary>
+            <summary>
+            SpaceSpliterUserControl
+            </summary>
+        </member>
+        <member name="M:WpfApp10.SpaceSpliterUserControl.RefreshData">
+            <summary> 更新数据 </summary>
+        </member>
+        <member name="M:WpfApp10.SpaceSpliterUserControl.SetPosition">
+            <summary> 刷新位置 </summary>
+        </member>
+        <member name="M:WpfApp10.SpaceSpliterUserControl.RaiseValueChangedEvent">
+            <summary> 触发 </summary>
+        </member>
+        <member name="M:WpfApp10.SpaceSpliterUserControl.InitializeComponent">
+            <summary>
+            InitializeComponent
             </summary>
         </member>
     </members>

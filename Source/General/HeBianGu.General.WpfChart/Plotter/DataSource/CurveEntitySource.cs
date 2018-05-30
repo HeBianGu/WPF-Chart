@@ -41,12 +41,12 @@ namespace HeBianGu.WPF.EChart
         public override void Draw(CurveChartPlotter chart)
         {
             List<ShapePointMarker> es = new List<ShapePointMarker>();
-            
+
             var ps = chart.FindResource("DefaultCurvePath") as Style;
             var ms = chart.FindResource("DefaultMarker") as Style;
 
             var ts = chart.FindResource("XCenterLable") as Style;
-            var d = chart.FindResource("dashCapline") as Style;
+            var d = chart.FindResource("XdashCapline") as Style;
 
             Path path = new Path();
             path.Style = ps;
@@ -66,7 +66,6 @@ namespace HeBianGu.WPF.EChart
                 // Todo ：增加线 
                 Point ptem = new Point(chart.GetX(item.X), chart.GetY(item.Y));
 
-
                 if (this.Marker != null && this.Marker.Visibility == Visibility.Visible)
                 {
                     ShapePointMarker m = Activator.CreateInstance(this.Marker.GetType()) as ShapePointMarker;
@@ -83,8 +82,6 @@ namespace HeBianGu.WPF.EChart
                     {
                         m.Text = string.Empty;
                     }
-
-
                     es.Add(m);
                 }
 
@@ -120,7 +117,7 @@ namespace HeBianGu.WPF.EChart
                 Line lx = new Line();
                 lx.X1 = 0;
                 lx.X2 = 0;
-                lx.Y1 = chart.ParallelCanvas.ActualHeight - chart.GetY(item.Y);
+                lx.Y1 = chart.CenterBottomCanvas.ActualHeight - chart.GetY(item.Y);
                 lx.Y2 = 0;
                 lx.Style = d;
                 lx.Stroke = chart.Foreground;
@@ -130,7 +127,7 @@ namespace HeBianGu.WPF.EChart
 
                 if (lx.Y1 > lx.Y2)
                 {
-                    chart.ParallelCanvas.Children.Add(lx);
+                    chart.CenterBottomCanvas.Children.Add(lx);
 
                     this.Elements.Add(lx);
                 }
@@ -146,13 +143,13 @@ namespace HeBianGu.WPF.EChart
             path.Data = pg;
             chart.PathCanvas.Children.Add(path);
 
-           
+
             this.Elements.Add(path);
 
             // Todo ：绘制Marker 
             foreach (var item in es)
             {
-                chart.ParallelBottomCanvas.Children.Add(item);
+                chart.ParallelCanvas.Children.Add(item);
 
                 this.Elements.Add(item);
             }

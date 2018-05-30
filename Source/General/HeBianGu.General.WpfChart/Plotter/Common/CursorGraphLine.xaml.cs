@@ -23,7 +23,7 @@ namespace HeBianGu.General.WpfChart
         CurveChartPlotter _curve;
 
         List<LineLegendDetail> _items = new List<LineLegendDetail>();
-        public  CursorGraphLine(CurveChartPlotter c)
+        public CursorGraphLine(CurveChartPlotter c)
         {
             InitializeComponent();
 
@@ -71,8 +71,6 @@ namespace HeBianGu.General.WpfChart
                 con.Style = s;
 
                 this._items.Add(con);
-
-                // ToEdit：2018-05-08 02:49:53 修改有父节点 
                 if (item.Marker.Parent != null)
                 {
                     this.content.Children.Add(item.Marker.Clone());
@@ -81,14 +79,18 @@ namespace HeBianGu.General.WpfChart
                 {
                     this.content.Children.Add(item.Marker);
                 }
+
                 this.stackPanel.Children.Add(con);
             }
-            
+
         }
-        
+
+
+        /// <summary> 刷新ToolTip </summary>
         public void Refresh()
         {
             this._items.Clear();
+
             this.stackPanel.Children.Clear();
 
             foreach (var item in _curve.DataSource)
@@ -96,26 +98,33 @@ namespace HeBianGu.General.WpfChart
                 if (item.Visibility != Visibility.Visible) continue;
 
                 LineLegendDetail con = new LineLegendDetail(item);
+
                 Style s = this.FindResource("DefaultLineLegendDetail") as Style;
+
                 con.Style = s;
 
                 this._items.Add(con);
+
                 //this.content.Children.Add(item.Marker);
+
                 this.stackPanel.Children.Add(con);
             }
         }
 
+
+        double param = 20;
         void parent_MouseMove(object sender, MouseEventArgs e)
         {
-            if(_items.Count==0)
+            if (_items.Count == 0)
             {
-                this.Visibility = Visibility.Hidden;return;
+                this.Visibility = Visibility.Hidden; return;
             }
 
             this.Visibility = Visibility.Visible;
+
             // Todo ：检测设置是否只显示有效值
             Point mousePos = Mouse.GetPosition(this);
-            double param = 5;
+           
             bool isHaveValue = false;
 
             foreach (var item in _items)
@@ -131,11 +140,9 @@ namespace HeBianGu.General.WpfChart
                 }
             }
 
-            
-
             if (this.IsOnlyHasValue)
             {
-                if(!isHaveValue)
+                if (!isHaveValue)
                 {
                     return;
                 }
@@ -147,7 +154,8 @@ namespace HeBianGu.General.WpfChart
             // Todo ：说明 
             RefreshCurveSource(mousePos);
         }
-        
+
+        bool _isCenteryOnly = true;
         /// <summary> 绘制标尺线 </summary>
         private void RefreshRepresentation(Point mousePos)
         {
@@ -165,7 +173,9 @@ namespace HeBianGu.General.WpfChart
             double space = 10;
 
             Canvas.SetLeft(this.grid_center, mousePos.X + space);
-            Canvas.SetTop(this.grid_center, mousePos.Y + space);
+
+
+            Canvas.SetTop(this.grid_center, _isCenteryOnly ? this.content.ActualHeight / 2 : mousePos.Y + space);
 
             if (this.content.ActualWidth - mousePos.X < this.stackPanel.ActualWidth + space)
             {
@@ -174,7 +184,7 @@ namespace HeBianGu.General.WpfChart
 
             if (this.content.ActualHeight - mousePos.Y < this.stackPanel.ActualHeight + space)
             {
-                Canvas.SetTop(this.grid_center, mousePos.Y - this.stackPanel.ActualHeight - space);
+                Canvas.SetTop(this.grid_center, _isCenteryOnly ? this.content.ActualHeight / 2 : mousePos.Y - this.stackPanel.ActualHeight - space);
             }
         }
 
@@ -186,7 +196,10 @@ namespace HeBianGu.General.WpfChart
                 var minXC = item.Curve.Source.FindLast(l => _curve.GetX(l.X) <= mousePos.X);
                 var maxXC = item.Curve.Source.Find(l => _curve.GetX(l.X) >= mousePos.X);
 
+                if (minXC == null || maxXC == null) continue;
+
                 Point minX = new Point(_curve.GetX(minXC.X), _curve.GetY(minXC.Y));
+
 
                 Point maxX = new Point(_curve.GetX(maxXC.X), _curve.GetY(maxXC.Y));
 
@@ -289,7 +302,7 @@ namespace HeBianGu.General.WpfChart
 
         #region - 控制变量 -
 
-        bool showHorizontalLine = true;
+        bool showHorizontalLine = false;
         bool showVerticalLine = true;
         bool autoHide = true;
         bool _isOnlyHasValue = true;

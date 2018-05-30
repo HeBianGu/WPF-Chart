@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.WpfChart",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfChartDemo", "..\..\Source\Application\WpfChartDemo\WpfChartDemo.csproj", "{A4CFCBB7-89AD-4ABD-8095-E81900843060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCardiogramReport", "..\..\Source\Application\WpfCardiogramReport\WpfCardiogramReport.csproj", "{24346D80-6C07-4CA3-AA9F-05A37F8DB275}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A4CFCBB7-89AD-4ABD-8095-E81900843060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4CFCBB7-89AD-4ABD-8095-E81900843060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4CFCBB7-89AD-4ABD-8095-E81900843060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,6 +5,9 @@
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Plotter/PlotterBaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Legend/LineLegendItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Plotter/Common/LineLegendDetail.xaml" />
-
+       
     </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush Color="#FF7A7A7A" x:Key="split_backcolor"/>
+    
 </ResourceDictionary> 
