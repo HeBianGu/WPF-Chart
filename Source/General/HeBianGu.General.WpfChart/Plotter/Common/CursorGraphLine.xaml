@@ -19,7 +19,7 @@
         <Style x:Key="innerBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="Opacity" Value="0.8"/>
+            <!--<Setter Property="Opacity" Value="0.8"/>-->
             <Setter Property="Margin" Value="8,4,8,4"/>
         </Style>
 

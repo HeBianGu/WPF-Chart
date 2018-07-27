@@ -175,7 +175,7 @@ namespace HeBianGu.General.WpfChart
             Canvas.SetLeft(this.grid_center, mousePos.X + space);
 
 
-            Canvas.SetTop(this.grid_center, _isCenteryOnly ? this.content.ActualHeight / 2 : mousePos.Y + space);
+            Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0: mousePos.Y + space);
 
             if (this.content.ActualWidth - mousePos.X < this.stackPanel.ActualWidth + space)
             {
@@ -184,7 +184,7 @@ namespace HeBianGu.General.WpfChart
 
             if (this.content.ActualHeight - mousePos.Y < this.stackPanel.ActualHeight + space)
             {
-                Canvas.SetTop(this.grid_center, _isCenteryOnly ? this.content.ActualHeight / 2 : mousePos.Y - this.stackPanel.ActualHeight - space);
+                Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0: mousePos.Y - this.stackPanel.ActualHeight - space);
             }
         }
 

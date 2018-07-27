@@ -108,7 +108,7 @@ namespace HeBianGu.WPF.EChart
             Storyboard.SetTargetProperty(start1, new PropertyPath("Width"));
             start1storyboard.Children.Add(start1);
 
-            DoubleAnimation double1 = new DoubleAnimation(0, this.PathCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
+            DoubleAnimation double1 = new DoubleAnimation(0, this.ParallelCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1)));
             double1.BeginTime = TimeSpan.FromSeconds(1);
             Storyboard.SetTarget(double1, this.PathCanvas);
             Storyboard.SetTargetProperty(double1, new PropertyPath("Width"));
@@ -124,7 +124,7 @@ namespace HeBianGu.WPF.EChart
             Storyboard.SetTargetProperty(start2, new PropertyPath("Width"));
             start2storyboard.Children.Add(start2);
 
-            DoubleAnimation double2 = new DoubleAnimation(0, this.CenterBottomCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1.5)));
+            DoubleAnimation double2 = new DoubleAnimation(0, this.ParallelCanvas.ActualWidth, new Duration(TimeSpan.FromSeconds(1.5)));
             double2.BeginTime = TimeSpan.FromSeconds(1.5);
             Storyboard.SetTarget(double2, this.CenterBottomCanvas);
             Storyboard.SetTargetProperty(double2, new PropertyPath("Width"));
