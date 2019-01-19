@@ -9,7 +9,7 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1200">
+        Title="MainWindow" Height="500" Width="1180">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -310,17 +310,24 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
                                             IsLegendVisible="True" Height="200" Width="800">
                             <!--MaxValueX="11" MinValueX="0"-->
                             <echart:StaticCurveChartPlotter.SplitItemYs>
-                                <echart:SplitItem Color="DarkGray" Value="400" Text="400 " ></echart:SplitItem>
-                                <echart:SplitItem Color="DarkGray" Value="350" Text="350 " ></echart:SplitItem>
-                                <echart:SplitItem Color="DarkGray" Value="300" Text="300 "></echart:SplitItem>
-                                <echart:SplitItem Color="DarkGray" Value="250" Text="250"></echart:SplitItem>
-                                <echart:SplitItem Color="Red" Value="240"  Text="240" SpliteType="HeighLight" Group="身高"  IsShowTrangle="false"/>
-                                <echart:SplitItem Color="DarkGray" Value="200" Text="200"></echart:SplitItem>
-                                <echart:SplitItem Color="Green" Value="150" Text="150" SpliteType="HeighLight"  Group="体重" IsShowTrangle="false"></echart:SplitItem>
-                                <echart:SplitItem Color="Red" Value="100" Text="100" SpliteType="HeighLight" Group="身高"  IsShowTrangle="false" ></echart:SplitItem>
-                                <echart:SplitItem Color="Green" Value="90"  Text="90"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="false" />
-                                <echart:SplitItem Color="DarkGray" Value="50" Text="50 " SpliteType="HeighLight" IsShowTrangle="false"></echart:SplitItem>
-                                <echart:SplitItem Color="DarkGray" Value="0" Text="0 "></echart:SplitItem>
+                                <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
+                                
+                                <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                <echart:SplitItem Color="Purple" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+
+                                <echart:SplitItem Color="Orange" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                <echart:SplitItem Color="Orange" Value="10"  Text="10kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
+                                <echart:SplitItem Color="Blue" Value="90" Text="90kg
+                                                  " SpliteType="HeighLight" IsShowTrangle="True"></echart:SplitItem>
+                            
                             </echart:StaticCurveChartPlotter.SplitItemYs>
 
                             <!--<echart:StaticCurveChartPlotter.DataSource>

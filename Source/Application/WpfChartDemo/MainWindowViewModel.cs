@@ -171,9 +171,7 @@ namespace WpfChartDemo
         {
             this.StopFlag = false;
 
-            string str = string.Empty;
-
-            //string str = Properties.Resources.心电图;
+            string str = Properties.Resources.心电图;
 
             var collection = str.Split(',').ToList();
 

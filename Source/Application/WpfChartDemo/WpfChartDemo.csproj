@@ -118,8 +118,10 @@
       <Name>HeBianGu.General.WpfChart</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\心电图 - 副本.txt" />
+    <Resource Include="Resources\心电图.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
