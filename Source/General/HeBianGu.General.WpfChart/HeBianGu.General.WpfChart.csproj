@@ -55,6 +55,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CardiogramUserControl.xaml.cs">
+      <DependentUpon>CardiogramUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RealCardiogramUserControl.xaml.cs">
+      <DependentUpon>RealCardiogramUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TwelveCardiogramControl.xaml.cs">
+      <DependentUpon>TwelveCardiogramControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ICurveChart.cs" />
     <Compile Include="Legend\Legend.xaml.cs">
       <DependentUpon>Legend.xaml</DependentUpon>
@@ -108,6 +117,18 @@
     <None Include="ReadMe\说明.dgml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\CardiogramUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RealCardiogramUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TwelveCardiogramControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

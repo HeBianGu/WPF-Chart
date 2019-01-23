@@ -58,6 +58,9 @@
     <Compile Include="CardiogramUserControl.xaml.cs">
       <DependentUpon>CardiogramUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwelveReprotCardiogram.xaml.cs">
+      <DependentUpon>TwelveReprotCardiogram.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Page Include="CardiogramReportUserControl.xaml">
       <SubType>Designer</SubType>
@@ -66,6 +69,10 @@
     <Page Include="CardiogramUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TwelveReprotCardiogram.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

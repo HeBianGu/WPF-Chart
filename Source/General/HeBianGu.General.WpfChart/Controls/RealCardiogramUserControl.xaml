@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Util.Controls;component/ChartControl/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="{x:Type echart:CardiogramCurveChartPlotter}" x:Key="Default_Cardiogram" BasedOn="{StaticResource CardiogramPlotterStyle}">

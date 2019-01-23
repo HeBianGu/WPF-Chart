@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="WpfChartDemo.TwelveReprotCardiogram"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:echart="clr-namespace:HeBianGu.WPF.EChart;assembly=HeBianGu.General.WpfChart"
+             mc:Ignorable="d" BorderThickness="24" 
+             Height="1150" Width="850"   Background="White" FontFamily="NSimSun">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--设置基础文本加粗-->
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <UserControl.Effect>
+        <DropShadowEffect BlurRadius="24" Color="#FF858484" Direction="90" ShadowDepth="3"/>
+    </UserControl.Effect>
+
+    <Grid Name="grid_all">
+        <Viewbox>
+            <Grid Height="1394" Width="1000" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="80"/>
+                        <!--<RowDefinition Height="80"/>-->
+                    </Grid.RowDefinitions>
+
+                    <!--<TextBlock  Grid.Row="0" FontSize="{StaticResource FirstSize}" FontWeight="Bold"HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="3" >
+                        <Run Text="{Binding OrgName}"/>
+                          <Run Text="心电图报告"/>
+                    </TextBlock>-->
+                    <Viewbox  Grid.Row="0" Height="30" VerticalAlignment="Center"  Stretch="Uniform" >
+                        <TextBlock  FontWeight="Bold" >
+                              <Run Text="{Binding OrgName}"/>
+                          <Run Text="心电图报告"/>
+                        </TextBlock>
+                    </Viewbox>
+
+                    <Grid Grid.Row="1" Margin="0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left" >
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" >姓名:</TextBlock>
+                            <TextBlock Grid.Column="1" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name,Mode=TwoWay}"></TextBlock>
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" >
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" >性别:</TextBlock>
+                            <TextBlock Grid.Column="3"  Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Gender,Mode=TwoWay}" ></TextBlock>
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Left" >
+                            <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" >年龄:</TextBlock>
+                            <TextBlock Grid.Column="5"  Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Age,Mode=TwoWay}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Left" >
+                            <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" >证件号码:</TextBlock>
+                            <TextBlock Grid.Column="5"  Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding CardID,Mode=TwoWay}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"  HorizontalAlignment="Left">
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">体检时间:</TextBlock>
+                            <TextBlock Grid.Column="1"  Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding MeasureDate}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="4"  Grid.Row="2"  HorizontalAlignment="Left">
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">体检序号:</TextBlock>
+                            <TextBlock Grid.Column="3"  Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding HealthNumber}"></TextBlock>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Border BorderBrush="Black" BorderThickness="0,1,0,1" Grid.RowSpan="4"/>
+
+                        <Viewbox>
+                            <echart:TwelveCardiogramControl Grid.Row="0" Height="950" Margin="-20"
+                                                            DataSource="{Binding XDCCollection}" 
+                                                            VerticalAlignment="Center"  
+                                                            HorizontalAlignment="Center"/>
+                        </Viewbox>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="0,20,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="心率："/>
+                        <TextBlock Grid.Column="1">
+                            <Run Text="{Binding HeartRate}"/>
+                            <Run Text="次/分钟"/>
+                        </TextBlock>
+                        <TextBlock Text="诊断：" Grid.Row="1"/>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="550"  HorizontalAlignment="Left">
+                            <Run Text="{Binding ECGResult}"/>
+                            <!--<Run Text="念佛大家都打击敌军覅的飓风等级房价地价基金覅就佛教的佛得角佛道鸡蛋放进东京"/>-->
+                        </TextBlock>
+                    </Grid>
+
+                    <!--<Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" >医院地址：</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding HCOrgName,Mode=TwoWay}" ></TextBlock>
+                        <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" >审核医生：</TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding DoctorName}"></TextBlock>
+
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.ColumnSpan="6">本次检查数据仅对本次检查结果负责。</TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.ColumnSpan="6">查看体检报告、了解更多健康资讯请扫码安装“妥妥医”软件。</TextBlock>
+
+                        
+                    </Grid>-->
+
+                    <!--<StackPanel Grid.Row="4" Grid.Column="4" Grid.RowSpan="3" Height="150" Width="150"  Margin="0,-60,0,-9" HorizontalAlignment="Right"  >
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/UserControls.Reports;component/Resources/二维码.png"/>
+                        </StackPanel.Background>
+                    </StackPanel>-->
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>

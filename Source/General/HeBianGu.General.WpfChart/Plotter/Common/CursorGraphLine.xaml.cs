@@ -67,6 +67,7 @@ namespace HeBianGu.General.WpfChart
                 if (item.Visibility != Visibility.Visible) continue;
 
                 LineLegendDetail con = new LineLegendDetail(item);
+
                 Style s = this.FindResource("DefaultLineLegendDetail") as Style;
                 con.Style = s;
 

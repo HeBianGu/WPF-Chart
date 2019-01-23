@@ -3,33 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfCardiogramReport"
+        xmlns:local="clr-namespace:WpfCardiogramReport" 
+        xmlns:wpfchartdemo="clr-namespace:WpfChartDemo"
         mc:Ignorable="d" WindowState="Maximized"
         Title="MainWindow" Height="350" >
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush Color="Green" x:Key="split_backcolor"/>
-
-
             <SolidColorBrush Color="#1791E6" x:Key="split_backcolor1"/>
             <SolidColorBrush Color="#18C800" x:Key="split_backcolor2"/>
             <SolidColorBrush Color="#FF0000" x:Key="split_backcolor3"/>
             <SolidColorBrush Color="#F8DE00" x:Key="split_backcolor4"/>
         </ResourceDictionary>
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ScrollViewer>
-            <local:CardiogramReportUserControl x:Name="card"/>
-        </ScrollViewer>
+
+        <TabControl>
+            <TabItem Header="心电报告">
+                <Viewbox>
+                    <local:CardiogramReportUserControl x:Name="card"/>
+                </Viewbox>
+            </TabItem>
+            <TabItem Header="心电报告">
+                <Viewbox>
+                    <wpfchartdemo:TwelveReprotCardiogram x:Name="sss"/>
+                </Viewbox>
+            </TabItem>
+        </TabControl>
 
         <Button Content="打印" Grid.Row="1" Click="Button_Click"/>
     </Grid>
