@@ -8,9 +8,9 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("HeBianGu.General.WpfChart")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("河边骨曲线图表控件")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("河边骨")]
 [assembly: AssemblyProduct("HeBianGu.General.WpfChart")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
