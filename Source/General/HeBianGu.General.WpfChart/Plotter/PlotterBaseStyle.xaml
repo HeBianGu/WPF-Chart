@@ -243,8 +243,8 @@
     <!--实线线样式-->
     <Style TargetType="{x:Type Line}" x:Key="line">
         <Setter Property="Stroke" Value="Black"/>
-        <Setter Property="StrokeThickness" Value="0.5"/>
-        <Setter Property="RenderTransform">
+        <Setter Property="StrokeThickness" Value="0.2"/>
+        <!--<Setter Property="RenderTransform">
             <Setter.Value>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -253,17 +253,17 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                --><!--<Setter Property="Stroke" Value="#FF1313F0"/>--><!--
                 <Setter Property="StrokeThickness" Value="1"/>
             </Trigger>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard Storyboard="{StaticResource Story_ScaleY}" />
             </EventTrigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 
     <!--虚线线样式-->
@@ -338,12 +338,12 @@
     <!--居中显示的文本-->
     <Style TargetType="{x:Type Label}" x:Key="XCenterLable">
         <Setter Property="Width" Value="100"/>
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="Height" Value="40"/> 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Label}">
                     <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -561,6 +561,16 @@
         <Setter Property="Foreground" Value="DarkRed"/>
         <Setter Property="DataSourceChangeBegionStory" Value="False"/>
         <Setter Property="Template" Value="{StaticResource DefaultPlotterTemplate}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type local:StaticCurveChartPlotter}" x:Key="S.StaticCurveChartPlotter.Default">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="IsLegendVisible" Value="True"/>
+        <Setter Property="Height" Value="200"/>
+        <Setter Property="Width" Value="800"/>
     </Style>
 
     <SolidColorBrush x:Key="MaxLineColor" Color="#FFFFFF"></SolidColorBrush>

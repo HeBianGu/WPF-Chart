@@ -68,7 +68,7 @@ namespace HeBianGu.General.WpfChart
 
                 LineLegendDetail con = new LineLegendDetail(item);
 
-                Style s = this.FindResource("DefaultLineLegendDetail") as Style;
+                Style s = this.TryFindResource("DefaultLineLegendDetail") as Style;
                 con.Style = s;
 
                 this._items.Add(con);
@@ -100,7 +100,7 @@ namespace HeBianGu.General.WpfChart
 
                 LineLegendDetail con = new LineLegendDetail(item);
 
-                Style s = this.FindResource("DefaultLineLegendDetail") as Style;
+                Style s = this.TryFindResource("DefaultLineLegendDetail") as Style;
 
                 con.Style = s;
 

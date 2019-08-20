@@ -5,7 +5,7 @@
     <ControlTemplate x:Key="DefaultLegendItemTemplate" TargetType="{x:Type local:LineLegendItem}">
         <Viewbox Height="20" >
             <Grid x:Name="g_all">
-                <Canvas x:Name="c_all" Height="30" Width="150">
+                <Canvas x:Name="c_all" Height="30" Width="150" Background="{TemplateBinding Background}">
 
                     <Line X1="10" X2="40" Y1="15" Y2="15" StrokeThickness="3" Stroke="{TemplateBinding Color}"/>
                     

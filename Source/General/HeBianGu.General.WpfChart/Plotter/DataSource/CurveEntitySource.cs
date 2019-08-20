@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 长虹智慧健康有限公司, All Rights Reserved.
+ * Copyright(c) 四川*******公司, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2018/1/17 16:43:40 
+ * 作者：[HeBianGu]   时间：2018/1/17 16:43:40 
  * 文件名：Class1 
  * 说明：
  * 
@@ -42,11 +42,11 @@ namespace HeBianGu.WPF.EChart
         {
             List<ShapePointMarker> es = new List<ShapePointMarker>();
 
-            var ps = chart.FindResource("DefaultCurvePath") as Style;
-            var ms = chart.FindResource("DefaultMarker") as Style;
+            var ps = chart.TryFindResource("DefaultCurvePath") as Style;
+            var ms = chart.TryFindResource("DefaultMarker") as Style;
 
-            var ts = chart.FindResource("XCenterLable") as Style;
-            var d = chart.FindResource("XdashCapline") as Style;
+            var ts = chart.TryFindResource("XCenterLable") as Style;
+            var d = chart.TryFindResource("XdashCapline") as Style;
 
             Path path = new Path();
             path.Style = ps;
@@ -106,6 +106,7 @@ namespace HeBianGu.WPF.EChart
                 Label t = new Label();
                 t.Content = item.Text;
                 t.Style = ts;
+                t.Foreground = chart.Foreground;
                 t.FontSize = chart.FontSize - 3;
                 Canvas.SetLeft(t, chart.GetX(item.X) - t.Width / 2);
                 Canvas.SetTop(t, 2 * param - t.Height / 2);
@@ -119,6 +120,7 @@ namespace HeBianGu.WPF.EChart
                 lx.X2 = 0;
                 lx.Y1 = chart.CenterBottomCanvas.ActualHeight - chart.GetY(item.Y);
                 lx.Y2 = 0;
+                lx.Width = 5;
                 lx.Style = d;
                 lx.Stroke = chart.Foreground;
                 lx.StrokeThickness = 0.5;

@@ -9,20 +9,20 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1180">
+        Title="MainWindow" Height="800" Width="1180">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush Color="Green" x:Key="split_backcolor"/>
+            <!--<SolidColorBrush Color="Green" x:Key="split_backcolor"/>
 
 
             <SolidColorBrush Color="#1791E6" x:Key="split_backcolor1"/>
             <SolidColorBrush Color="#18C800" x:Key="split_backcolor2"/>
             <SolidColorBrush Color="#FF0000" x:Key="split_backcolor3"/>
-            <SolidColorBrush Color="#F8DE00" x:Key="split_backcolor4"/>
+            <SolidColorBrush Color="#F8DE00" x:Key="split_backcolor4"/>-->
         </ResourceDictionary>
 
     </Window.Resources>
@@ -297,137 +297,160 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
             <TabItem Header="曲线视图">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="430*"/>
-                        <RowDefinition Height="39*"/>
-                        <RowDefinition Height="39*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
                     <Button Content="清理数据" Click="Button_Click" Grid.Row="1"/>
                     <Button Content="显示数据" Click="Button_Click_1" Grid.Row="2"/>
-                    <Viewbox>
-                        <echart:StaticCurveChartPlotter x:Name="chart" Background="White" DataSource="{Binding Collection}"
-                                            FontSize="12" MaxValueY="400" MinValueY="0" MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" 
-                                            IsLegendVisible="True" Height="200" Width="800">
-                            <!--MaxValueX="11" MinValueX="0"-->
-                            <echart:StaticCurveChartPlotter.SplitItemYs>
-                                <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
-                                <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
-                                <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
-                                <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
-                                <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
-                                <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
-                                <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
-                                <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
-                                <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
-                                
-                                <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
-                                <echart:SplitItem Color="Purple" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+                 
+                    <ScrollViewer>
+                        <UniformGrid Columns="2">
+                            <GroupBox Header="曲线视图 - 浅色调（渐变蒙版）">
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding Collection}" MaxValueY="400" MinValueY="0" Background="White" 
+                                                        Foreground="Black" FontSize="12"
+                                                        IsLegendVisible="True"
+                                                        MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                            <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                            <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
 
-                                <echart:SplitItem Color="Orange" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
-                                <echart:SplitItem Color="Orange" Value="10"  Text="10kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
-                                <echart:SplitItem Color="Blue" Value="90" Text="90kg
-                                                  " SpliteType="HeighLight" IsShowTrangle="True"></echart:SplitItem>
-                            
-                            </echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Orange" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
 
-                            <!--<echart:StaticCurveChartPlotter.DataSource>
-                    <echart:CurveEntitySource >
-                        <echart:CurveEntitySource.Source>
-                            <echart:PointC X="0" Y="110" Text="2018-01-01"/>
-                            <echart:PointC X="1" Y="93" Text="2018-02-01"/>
-                            <echart:PointC X="2" Y="92" Text="2018-03-01"/>
-                            <echart:PointC X="3" Y="115" Text="2018-04-01"/>
-                            <echart:PointC X="4" Y="102" Text="2018-05-01"/>
-                            <echart:PointC X="4.1" Y="122" Text="2018-05-01"/>
-                            <echart:PointC X="4.2" Y="153" Text="2018-05-03"/>
-                            <echart:PointC X="4.3" Y="132" Text="2018-05-04"/>
-                            <echart:PointC X="4.4" Y="114" Text="2018-05-06"/>
-                            <echart:PointC X="4.5" Y="125" Text="2018-05-07"/>
-                            <echart:PointC X="4.6" Y="121" Text="2018-05-08"/>
-                            <echart:PointC X="5" Y="125" Text="2018-06-01"/>
-                            <echart:PointC X="6" Y="95" Text="2018-07-01"/>
-                            <echart:PointC X="7" Y="88" Text="2018-08-01"/>
-                            <echart:PointC X="7.3" Y="68" Text="2018-08-11"/>
-                            <echart:PointC X="8" Y="77" Text="2018-09-01"/>
-                            <echart:PointC X="9" Y="65" Text="2018-10-01"/>
-                            <echart:PointC X="10" Y="91" Text="2018-11-01"/>
-                            <echart:PointC X="11" Y="90" Text="2018-12-01"/>
-                        </echart:CurveEntitySource.Source>
-                        <echart:CurveEntitySource.Text>收缩压</echart:CurveEntitySource.Text>
-                        <echart:CurveEntitySource.Color>
-                            <SolidColorBrush Color="#1791E6"/>
-                        </echart:CurveEntitySource.Color>
-                        <echart:CurveEntitySource.Marker>
-                            <echart:T5PointMarker Fill="#1791E6"/>
-                        </echart:CurveEntitySource.Marker>
-                    </echart:CurveEntitySource>
+                                            <echart:SplitItem Color="Blue" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Purple" Value="80"  Text="80kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
 
-                    <echart:CurveEntitySource >
-                        <echart:CurveEntitySource.Source>
-                            <echart:PointC X="0" Y="112" Text="2018-01-01"/>
-                            <echart:PointC X="1" Y="112" Text="2018-02-01"/>
-                            <echart:PointC X="2" Y="112" Text="2018-03-01"/>
-                            <echart:PointC X="3" Y="155" Text="2018-04-01"/>
-                            <echart:PointC X="4" Y="112" Text="2018-05-01"/>
-                            <echart:PointC X="4.1" Y="112" Text="2018-05-01"/>
-                            <echart:PointC X="4.2" Y="112" Text="2018-05-03"/>
-                            <echart:PointC X="4.3" Y="112" Text="2018-05-04"/>
-                            <echart:PointC X="4.4" Y="114" Text="2018-05-06"/>
-                            <echart:PointC X="4.5" Y="112" Text="2018-05-07"/>
-                            <echart:PointC X="4.6" Y="112" Text="2018-05-08"/>
-                            <echart:PointC X="5" Y="112" Text="2018-06-01"/>
-                            <echart:PointC X="6" Y="112" Text="2018-07-01"/>
-                            <echart:PointC X="7" Y="98" Text="2018-08-01"/>
-                            <echart:PointC X="7.3" Y="112" Text="2018-08-11"/>
-                            <echart:PointC X="8" Y="112" Text="2018-09-01"/>
-                            <echart:PointC X="9" Y="112" Text="2018-10-01"/>
-                            <echart:PointC X="10" Y="112" Text="2018-11-01"/>
-                            <echart:PointC X="11" Y="110" Text="2018-12-01"/>
-                        </echart:CurveEntitySource.Source>
-                        <echart:CurveEntitySource.Text>舒张压</echart:CurveEntitySource.Text>
-                        <echart:CurveEntitySource.Color>
-                            <SolidColorBrush Color="Red"/>
-                        </echart:CurveEntitySource.Color>
-                        <echart:CurveEntitySource.Marker>
-                            <echart:T5PointMarker Fill="Red"/>
-                        </echart:CurveEntitySource.Marker>
-                    </echart:CurveEntitySource>
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
 
-                    <echart:CurveEntitySource >
-                        <echart:CurveEntitySource.Source>
-                            <echart:PointC X="0" Y="132" Text="2018-01-01"/>
-                            <echart:PointC X="1" Y="111" Text="2018-02-01"/>
-                            <echart:PointC X="2" Y="122" Text="2018-03-01"/>
-                            <echart:PointC X="3" Y="155" Text="2018-04-01"/>
-                            <echart:PointC X="4" Y="112" Text="2018-05-01"/>
-                            <echart:PointC X="4.1" Y="112" Text="2018-05-01"/>
-                            <echart:PointC X="4.2" Y="152" Text="2018-05-03"/>
-                            <echart:PointC X="4.3" Y="112" Text="2018-05-04"/>
-                            <echart:PointC X="4.4" Y="154" Text="2018-05-06"/>
-                            <echart:PointC X="4.5" Y="112" Text="2018-05-07"/>
-                            <echart:PointC X="4.6" Y="142" Text="2018-05-08"/>
-                            <echart:PointC X="5" Y="112" Text="2018-06-01"/>
-                            <echart:PointC X="6" Y="132" Text="2018-07-01"/>
-                            <echart:PointC X="7" Y="98" Text="2018-08-01"/>
-                            <echart:PointC X="7.3" Y="112" Text="2018-08-11"/>
-                            <echart:PointC X="8" Y="112" Text="2018-09-01"/>
-                            <echart:PointC X="9" Y="122" Text="2018-10-01"/>
-                            <echart:PointC X="10" Y="112" Text="2018-11-01"/>
-                            <echart:PointC X="11" Y="110" Text="2018-12-01"/>
-                        </echart:CurveEntitySource.Source>
-                        <echart:CurveEntitySource.Text>脉搏</echart:CurveEntitySource.Text>
-                        <echart:CurveEntitySource.Color>
-                            <SolidColorBrush Color="Green"/>
-                        </echart:CurveEntitySource.Color>
-                        <echart:CurveEntitySource.Marker>
-                            <echart:TrianglePointMarker Fill="Green"/>
-                        </echart:CurveEntitySource.Marker>
-                    </echart:CurveEntitySource>
-                </echart:StaticCurveChartPlotter.DataSource>-->
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+
+                            <GroupBox Header="曲线视图 - 浅色调（渐变蒙版）">
+
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding Collection}" MaxValueY="400" MinValueY="0" Background="{DynamicResource S.Brush.TextBackground.Default}" 
+                                                        Foreground="{DynamicResource S.Brush.TextForeground.Default}" FontSize="12"
+                                                        IsLegendVisible="True" CoverOpacity="0.3"
+                                                        MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                            <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                            <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
+
+                                            <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Orange" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+
+                                            <echart:SplitItem Color="Blue" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Purple" Value="80"  Text="80kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
+
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
+
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+
+                            <GroupBox Header="曲线视图 - 浅色调（非渐变蒙版）">
 
 
-                        </echart:StaticCurveChartPlotter>
-                    </Viewbox>
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding Collection}" MaxValueY="400" MinValueY="0" Background="{DynamicResource S.Brush.TextBackground.Default}" 
+                                                        Foreground="{DynamicResource S.Brush.TextForeground.Default}" FontSize="12"
+                                                        IsLegendVisible="True" 
+                                                        MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                            <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                            <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
+
+                                            <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Red" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+
+                                            <echart:SplitItem Color="Blue" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Blue" Value="80"  Text="80kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
+
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
+
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+
+
+
+                            <GroupBox Header="曲线视图 - 浅色调（无蒙版）">
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding Collection}" MaxValueY="400" MinValueY="0" Background="{DynamicResource S.Brush.TextBackground.Default}" 
+                                                        Foreground="{DynamicResource S.Brush.TextForeground.Default}" FontSize="12"
+                                                        IsLegendVisible="True"
+                                                        MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                            <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                            <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+
+                            <GroupBox Header="曲线视图 - 深色调">
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding Collection}" MaxValueY="400" MinValueY="0" 
+                                                        Background="Black" 
+                                                        Foreground="White" FontSize="12"
+                                                        IsLegendVisible="True" CoverOpacity="0.3"
+                                                        MaxValueX="{Binding MaxValue}" MinValueX="{Binding MinValue}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="LightGray" Value="400" Text="400 "/>
+                                            <echart:SplitItem Color="LightGray" Value="350" Text="350 "/>
+                                            <echart:SplitItem Color="LightGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="LightGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="LightGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="LightGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="LightGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="LightGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="LightGray" Value="0" Text="0 "/>
+
+                                            <echart:SplitItem Color="Yellow" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Yellow" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+
+                                            <echart:SplitItem Color="White" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="White" Value="10"  Text="10kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
+
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
+
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+                        </UniformGrid>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
 

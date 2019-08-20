@@ -1,12 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:HeBianGu.General.WpfChart">
+                    xmlns:local="clr-namespace:HeBianGu.WPF.EChart">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Plotter/PlotterBaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Legend/LineLegendItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HeBianGu.General.WpfChart;component/Plotter/Common/LineLegendDetail.xaml" />
        
     </ResourceDictionary.MergedDictionaries>
+
 
     <SolidColorBrush Color="#FF7A7A7A" x:Key="split_backcolor"/>
     

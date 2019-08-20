@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 长虹智慧健康有限公司, All Rights Reserved.
+ * Copyright(c) 四川*******公司, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2018/1/18 11:29:45 
+ * 作者：[HeBianGu]   时间：2018/1/18 11:29:45 
  * 文件名：CurveChartPlotter 
  * 说明：
  * 
@@ -98,15 +98,15 @@ namespace HeBianGu.WPF.EChart
         /// <summary> 刷新标尺线 </summary>
         void RefreshSplitItemY()
         {
-            var t = this.FindResource("line") as Style;
+            var t = this.TryFindResource("line") as Style;
 
-            var d = this.FindResource("dashCapline") as Style;
+            var d = this.TryFindResource("dashCapline") as Style;
 
-            var a = this.FindResource("pathTrangle") as Style;
+            var a = this.TryFindResource("pathTrangle") as Style;
 
-            var rs = this.FindResource("MarkBoardRectangle") as Style;
+            //var rs = this.TryFindResource("MarkBoardRectangle") as Style;
 
-            var color = this.FindResource("MaxLineColor") as Brush;
+            var color = this.TryFindResource("MaxLineColor") as Brush;
 
 
             // Todo ：绘制普通网格线 
@@ -118,9 +118,10 @@ namespace HeBianGu.WPF.EChart
                 l.X1 = 0;
                 l.Y1 = 0;
                 l.Y2 = 0;
+                l.Height = 5;
                 if (item.Color != null) l.Stroke = item.Color;
                 l.X2 = ParallelCanvas.ActualWidth;
-                l.Style = this.InnerVerticalLineStyle == null ? l.Style = t : this.InnerVerticalLineStyle;
+                l.Style = this.InnerVerticalLineStyle == null ? t : this.InnerVerticalLineStyle;
                 l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
                 Canvas.SetTop(l, this.GetY(item.Value));
                 this.ParallelCanvas.Children.Add(l);
@@ -135,6 +136,7 @@ namespace HeBianGu.WPF.EChart
                 l.X1 = 0;
                 l.Y1 = 0;
                 l.Y2 = 0;
+                l.Height = 5;
                 if (item.Color != null) l.Stroke = item.Color;
                 l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
 
@@ -226,7 +228,8 @@ namespace HeBianGu.WPF.EChart
                     if (height < 0) continue;
                     r.Height = height;
                     r.Fill = Brushes.Orange;
-                    r.Style = rs;
+                    r.Opacity = this.CoverOpacity;
+                    //r.Style = rs;
 
                     Color color1 = (Color)ColorConverter.ConvertFromString(collection[i - 1].Color.ToString());
                     Color color2 = (Color)ColorConverter.ConvertFromString(collection[i].Color.ToString());
@@ -245,15 +248,15 @@ namespace HeBianGu.WPF.EChart
         /// <summary> 刷新标尺线 </summary>
         void RefreshSplitItemX()
         {
-            var t = this.FindResource("line") as Style;
+            var t = this.TryFindResource("line") as Style;
 
-            var d = this.FindResource("dashCapline") as Style;
+            var d = this.TryFindResource("dashCapline") as Style;
 
-            var a = this.FindResource("pathTrangle") as Style;
+            var a = this.TryFindResource("pathTrangle") as Style;
 
-            var rs = this.FindResource("MarkBoardRectangle") as Style;
+            var rs = this.TryFindResource("MarkBoardRectangle") as Style;
 
-            var color = this.FindResource("MaxLineColor") as Brush;
+            var color = this.TryFindResource("MaxLineColor") as Brush;
 
 
             // Todo ：绘制普通网格线 
@@ -267,6 +270,7 @@ namespace HeBianGu.WPF.EChart
                 l.Y2 = ParallelCanvas.ActualHeight;
                 l.Stroke = item.Color;
                 l.X2 = 0;
+                l.Width = 5;
                 l.Style = this.InnerHorizontalLineStyle == null ? l.Style = t : this.InnerHorizontalLineStyle;
                 l.Style = item.LineStyle == null ? l.Style : item.LineStyle;
 
@@ -292,9 +296,9 @@ namespace HeBianGu.WPF.EChart
 
             double param = 5;
 
-            var ts = this.FindResource("XCenterLable") as Style;
-            var tsright = this.FindResource("YRightLable") as Style;
-            //var d = this.FindResource("dashCapline") as Style;
+            var ts = this.TryFindResource("XCenterLable") as Style;
+            var tsright = this.TryFindResource("YRightLable") as Style;
+            //var d = this.TryFindResource("dashCapline") as Style;
 
 
             // Todo ：绘制轮廓 
@@ -361,6 +365,7 @@ namespace HeBianGu.WPF.EChart
                     Label t = new Label();
                     t.Content = item.Text;
                     t.Style = ts;
+                    t.Foreground = this.Foreground;
                     t.FontSize = this.FontSize;
 
                     Canvas.SetLeft(t, this.GetX(item.Value) - t.Width / 2);
@@ -449,6 +454,7 @@ namespace HeBianGu.WPF.EChart
                     Label t = new Label();
                     t.Content = item.Text;
                     t.FontSize = this.FontSize;
+                    t.Foreground = this.Foreground;
                     t.Style = tsright;
                     Canvas.SetTop(t, this.GetY(item.Value) - t.Height / 2);
                     Canvas.SetRight(t, param);
@@ -474,8 +480,9 @@ namespace HeBianGu.WPF.EChart
         void BindLegend(ICurveEntitySource item)
         {
             LineLegendItem l = new LineLegendItem(item);
-            Style s = this.FindResource("DefaultLineLegendItem") as Style;
+            Style s = this.TryFindResource("DefaultLineLegendItem") as Style;
             l.Style = s;
+            l.Background = this.Background;
 
             this.legend.AddLegendItem(l);
         }
@@ -538,6 +545,28 @@ namespace HeBianGu.WPF.EChart
         #endregion
 
         #region - 依赖属性 -
+
+
+
+        public double CoverOpacity
+        {
+            get { return (double)GetValue(CoverOpacityProperty); }
+            set { SetValue(CoverOpacityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CoverOpacityProperty =
+            DependencyProperty.Register("CoverOpacity", typeof(double), typeof(CurveChartPlotter), new PropertyMetadata(0.1, (d, e) =>
+             {
+                 CurveChartPlotter control = d as CurveChartPlotter;
+
+                 if (control == null) return;
+
+                 //double config = e.NewValue as double;
+
+             }));
+
+
         public List<ICurveEntitySource> DataSource
         {
             get { return (List<ICurveEntitySource>)GetValue(DataSourceProperty); }

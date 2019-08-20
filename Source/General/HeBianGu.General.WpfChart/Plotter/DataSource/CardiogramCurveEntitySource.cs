@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 长虹智慧健康有限公司, All Rights Reserved.
+ * Copyright(c) 四川*******公司, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2018/1/19 16:39:09 
+ * 作者：[HeBianGu]   时间：2018/1/19 16:39:09 
  * 文件名：Class1 
  * 说明：
  * 
@@ -31,7 +31,7 @@ namespace HeBianGu.WPF.EChart
         public override void Draw(CurveChartPlotter chart)
         {
 
-            var ps = chart.FindResource("CardiogramDefaultPath") as Style;
+            var ps = chart.TryFindResource("CardiogramDefaultPath") as Style;
             Path path = new Path();
             path.Style = ps;
 
