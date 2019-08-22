@@ -298,8 +298,8 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
 
                     <Button Content="清理数据" Click="Button_Click" Grid.Row="1"/>
