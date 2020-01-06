@@ -263,7 +263,7 @@ namespace WpfChartDemo
 
             int skip = total > count ? total - count : 0;
 
-            Application.Current.Dispatcher.Invoke(() =>
+            Application.Current?.Dispatcher.Invoke(() =>
             {
                 var cs = collection.Skip(skip).ToList();
 

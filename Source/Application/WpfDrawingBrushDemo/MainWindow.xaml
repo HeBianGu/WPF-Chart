@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfDrawingBrushDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDrawingBrushDemo" 
+        xmlns:drawing="clr-namespace:HeBianGu.General.DrawingBrush;assembly=HeBianGu.General.DrawingBrush" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="渐变色绘制">
+                <Grid>
+                    <ListBox Grid.Row="1" BorderBrush="Transparent"
+                 ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow},Path=LinearWriteableBitmaps}">
+                        <ListBox.Resources>
+                            <DataTemplate DataType="{x:Type drawing:LinearBitmap}">
+                                <Grid Width="200" Height="30">
+                                    <Image Stretch="Fill" Source="{Binding Source}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.Resources>
+
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="平面网格">
+                <Image Source="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow},Path=PlanarGridBitmap.Source}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

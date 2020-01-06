@@ -1,13 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.WpfChart", "..\..\Source\General\HeBianGu.General.WpfChart\HeBianGu.General.WpfChart.csproj", "{6B96C2E8-856F-4417-8127-CAFC2B71917C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfChartDemo", "..\..\Source\Application\WpfChartDemo\WpfChartDemo.csproj", "{A4CFCBB7-89AD-4ABD-8095-E81900843060}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCardiogramReport", "..\..\Source\Application\WpfCardiogramReport\WpfCardiogramReport.csproj", "{24346D80-6C07-4CA3-AA9F-05A37F8DB275}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.DrawingBrush", "..\..\Source\General\HeBianGu.General.DrawingBrush\HeBianGu.General.DrawingBrush.csproj", "{C2280400-0E7B-4829-90A7-9C1348C9A3DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{2E73A1A3-8586-419B-B900-BA49D6CDF752}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{79195BF1-9154-43CC-B9BB-E49A7CF318C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDrawingBrushDemo", "..\..\Source\Application\WpfDrawingBrushDemo\WpfDrawingBrushDemo.csproj", "{75A24108-1140-4342-911D-FE958FEAA056}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +35,26 @@ Global
 		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24346D80-6C07-4CA3-AA9F-05A37F8DB275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2280400-0E7B-4829-90A7-9C1348C9A3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2280400-0E7B-4829-90A7-9C1348C9A3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2280400-0E7B-4829-90A7-9C1348C9A3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2280400-0E7B-4829-90A7-9C1348C9A3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A24108-1140-4342-911D-FE958FEAA056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A24108-1140-4342-911D-FE958FEAA056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A24108-1140-4342-911D-FE958FEAA056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A24108-1140-4342-911D-FE958FEAA056}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6B96C2E8-856F-4417-8127-CAFC2B71917C} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
+		{A4CFCBB7-89AD-4ABD-8095-E81900843060} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
+		{24346D80-6C07-4CA3-AA9F-05A37F8DB275} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
+		{C2280400-0E7B-4829-90A7-9C1348C9A3DA} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
+		{75A24108-1140-4342-911D-FE958FEAA056} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CD86719-0967-40D7-89A5-1A62313FCC61}
 	EndGlobalSection
 EndGlobal
