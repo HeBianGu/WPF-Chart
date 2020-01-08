@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDrawingBrushDemo" 
         xmlns:drawing="clr-namespace:HeBianGu.General.DrawingBrush;assembly=HeBianGu.General.DrawingBrush" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1000">
     <Grid>
         <TabControl>
             <TabItem Header="渐变色绘制">
@@ -23,7 +23,7 @@
 
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <UniformGrid Columns="4"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>

@@ -98,7 +98,7 @@ namespace WpfDrawingBrushDemo
 
         public void InitPlanarGridBitmap()
         {
-            PlanarGridBitmap planar = new PlanarGridBitmap(500, 500);
+            PlanarGridBitmap planar = new PlanarGridBitmap(1000, 1000);
 
             PlanarGridBrush brush = new PlanarGridBrush();
 
@@ -106,27 +106,27 @@ namespace WpfDrawingBrushDemo
 
             Random random = new Random();
 
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 40; i++)
             {
-                for (int j = 0; j < 25; j++)
+                for (int j = 0; j < 40; j++)
                 {
-                    values[i, j] = random.Next(1, 50);
+                    values[i, j] = (20 - Math.Abs((i - 20))) * (20 - Math.Abs((j - 20)));
                 }
             }
 
             brush.Values = values;
 
-            brush.ItemHeigh = 20;
-            brush.ItemWidth = 20;
+            brush.ItemHeigh = 25;
+            brush.ItemWidth = 25;
 
             brush.MaxColor = Color.FromArgb(255, 255, 0, 0);
-            brush.MinColor = Color.FromArgb(255, 0, 0, 255);
-            brush.MaxValue = 50;
+            brush.MinColor = Color.FromArgb(255, 255, 255, 0);
+            brush.MaxValue = 20 * 20;
             brush.MinValue = 1;
 
             planar.Brushs.Add(brush);
 
-             planar.Draw();
+            planar.Draw();
 
             PlanarGridBitmap = planar;
 
