@@ -72,14 +72,19 @@ namespace HeBianGu.General.WpfChart
                 con.Style = s;
 
                 this._items.Add(con);
-                if (item.Marker.Parent != null)
+
+                if (item.Marker != null)
                 {
-                    this.content.Children.Add(item.Marker.Clone());
+                    if (item.Marker.Parent != null)
+                    {
+                        this.content.Children.Add(item.Marker.Clone());
+                    }
+                    else
+                    {
+                        this.content.Children.Add(item.Marker);
+                    }
                 }
-                else
-                {
-                    this.content.Children.Add(item.Marker);
-                }
+
 
                 this.stackPanel.Children.Add(con);
             }
@@ -125,7 +130,7 @@ namespace HeBianGu.General.WpfChart
 
             // Todo ：检测设置是否只显示有效值
             Point mousePos = Mouse.GetPosition(this);
-           
+
             bool isHaveValue = false;
 
             foreach (var item in _items)
@@ -176,7 +181,7 @@ namespace HeBianGu.General.WpfChart
             Canvas.SetLeft(this.grid_center, mousePos.X + space);
 
 
-            Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0: mousePos.Y + space);
+            Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0 : mousePos.Y + space);
 
             if (this.content.ActualWidth - mousePos.X < this.stackPanel.ActualWidth + space)
             {
@@ -185,7 +190,7 @@ namespace HeBianGu.General.WpfChart
 
             if (this.content.ActualHeight - mousePos.Y < this.stackPanel.ActualHeight + space)
             {
-                Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0: mousePos.Y - this.stackPanel.ActualHeight - space);
+                Canvas.SetBottom(this.grid_center, _isCenteryOnly ? 0 : mousePos.Y - this.stackPanel.ActualHeight - space);
             }
         }
 
@@ -209,12 +214,17 @@ namespace HeBianGu.General.WpfChart
                 // Todo ：焦点的Y值 
                 double resultY = xpercent * (maxX.Y - minX.Y) + minX.Y;
 
-                item.Curve.Marker.Stroke = this.horizLine.Stroke;
-                item.Curve.Marker.Fill = this.horizLine.Stroke;
+                if (item.Curve.Marker != null)
+                {
+                    item.Curve.Marker.Stroke = this.horizLine.Stroke;
+                    item.Curve.Marker.Fill = this.horizLine.Stroke;
 
-                Point cross = new Point(mousePos.X, resultY);
-                Canvas.SetLeft(item.Curve.Marker, cross.X);
-                Canvas.SetTop(item.Curve.Marker, cross.Y);
+                    Point cross = new Point(mousePos.X, resultY);
+                    Canvas.SetLeft(item.Curve.Marker, cross.X);
+                    Canvas.SetTop(item.Curve.Marker, cross.Y);
+                }
+
+             
 
                 string value = Math.Round(this._curve.GetYValue(resultY), 2).ToString();
 

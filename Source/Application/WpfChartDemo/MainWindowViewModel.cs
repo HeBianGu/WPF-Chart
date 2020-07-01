@@ -46,9 +46,24 @@ namespace WpfChartDemo
             }
         }
 
+
+        private List<ICurveEntitySource> _collectionData = new List<ICurveEntitySource>();
+        /// <summary> 曲线图数据 </summary>
+        public List<ICurveEntitySource> CollectionData
+        {
+            get { return _collectionData; }
+            set
+            {
+                _collectionData = value;
+                RaisePropertyChanged("CollectionData");
+            }
+        }
+
         void Init()
         {
-            RefreshCurveData();
+            this.RefreshCurveData();
+
+            this.RefreshCurveBigData(true);
 
             this.RefreshCardiogramCurve();
 
@@ -77,6 +92,47 @@ namespace WpfChartDemo
                 _right = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public void RefreshCurveBigData(bool init = false)
+        {
+
+            List<ICurveEntitySource> collection = new List<ICurveEntitySource>();
+
+            CurveEntitySource entity = new CurveEntitySource();
+            entity.Text = "Y";
+            entity.Color = Brushes.Red;
+            //entity.Marker = new CirclePointMarker();
+            entity.Marker = null;
+
+            entity.IsAnimal = false;
+            //entity.Marker.Fill = Brushes.Red;
+
+            for (int i = 0; i < 2000; i++)
+            {
+                PointC point = new PointC();
+                point.X = i;
+
+
+                point.Y = (Math.Sin(i * 0.02) + Math.Cos(i * 0.5) + Math.Sin(i * 0.1) + Math.Sin(i * 0.01)) * 50 + 200;
+
+                //point.Y = Math.Cos(i * 0.006)*150+ (Math.Cos(i * 0.5) + Math.Sin(i * 0.1) + Math.Sin(i * 0.01))*50 + 200;
+
+                point.Text = i.ToString();
+                entity.Source.Add(point);
+
+                if (init)
+                {
+                    this.MinValueBig = this.MinValueBig > point.X ? point.X : this.MinValueBig;
+                    this.MaxValueBig = this.MaxValueBig < point.X ? point.X : this.MaxValueBig;
+                }
+
+            }
+            collection.Add(entity);
+
+
+            this.CollectionData = collection;
+
         }
 
         public void RefreshCurveData()
@@ -154,6 +210,30 @@ namespace WpfChartDemo
             }
         }
 
+        private double _maxValuebig = double.MinValue;
+        /// <summary> 说明 </summary>
+        public double MaxValueBig
+        {
+            get { return _maxValuebig; }
+            set
+            {
+                _maxValuebig = value;
+                RaisePropertyChanged("MaxValueBig");
+            }
+        }
+
+        private double _minValuebig = double.MaxValue;
+        /// <summary> 说明 </summary>
+        public double MinValueBig
+        {
+            get { return _minValuebig; }
+            set
+            {
+                _minValuebig = value;
+                RaisePropertyChanged("MinValueBig");
+            }
+        }
+
         private List<ICurveEntitySource> _cardiogramCollection = new List<ICurveEntitySource>();
         /// <summary> 心电图数据 </summary>
         public List<ICurveEntitySource> CardiogramCollection
@@ -221,10 +301,7 @@ namespace WpfChartDemo
             Task task = new Task(action);
             task.Start();
 
-}
-
-
-
+        }
 
         private bool _stopFlag = false;
         /// <summary> 说明 </summary>
@@ -362,9 +439,9 @@ namespace WpfChartDemo
                         this.ShowLast(items, 140, items.Count);
                     }
                     break;
-                case "Case2":
+                case "RangeChanged":
                     {
-
+                        this.RefreshCurveBigData();
                     }
                     break;
                 case "Case3":
@@ -447,6 +524,6 @@ namespace WpfChartDemo
 
         #endregion
     }
-    
-    
+
+
 }

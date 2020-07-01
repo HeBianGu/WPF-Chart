@@ -595,8 +595,7 @@ namespace HeBianGu.WPF.EChart
 
         static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control
-                = d as CurveChartPlotter;
+            var control  = d as CurveChartPlotter;
 
             if (control.IsLoaded)
             {

@@ -153,6 +153,41 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type Path}" x:Key="SingleCurvePath">
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <LinearGradientBrush  StartPoint ="0,0"  EndPoint ="0,1" >
+                    <GradientStop  Color ="Red"  Offset ="1" ></GradientStop>
+                    <GradientStop  Color ="Green"  Offset ="0.6" ></GradientStop>
+                    <GradientStop  Color ="Green"  Offset ="0.3" ></GradientStop>
+                    <GradientStop  Color ="Red"  Offset ="0" ></GradientStop>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <!--<Setter Property="Stroke" Value="#FF1313F0"/>-->
+                <Setter Property="StrokeThickness" Value="2"/>
+            </Trigger>
+
+
+            <!--<EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource Story_UpToDown}" />
+            </EventTrigger>-->
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type Shape}" x:Key="DefaultMarker">
         <Setter Property="RenderTransform">
             <Setter.Value>

@@ -454,7 +454,61 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
                 </Grid>
             </TabItem>
 
-            
+            <TabItem Header="曲线视图（多数据）">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="清理数据" Click="Button_Click" Grid.Row="1"/>
+                    <Button Content="显示数据" Click="Button_Click_1" Grid.Row="2"/>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Text="最小值："/>
+                        <Slider x:Name="sl_min" Value="{Binding MinValueBig}" Width="200" Maximum="{Binding ElementName=sl_max,Path=Value,Mode=TwoWay}" ValueChanged="Slider_ValueChanged"/>
+
+                        <TextBlock Text="最大值：" Margin="20,0,0,0"/>
+                        <Slider x:Name="sl_max" Value="{Binding MaxValueBig}"   Width="200" Minimum="{Binding ElementName=sl_min,Path=Value,Mode=TwoWay}" Maximum="{Binding MaxValueBig,Mode=OneTime}" ValueChanged="Slider_ValueChanged"/>
+                    </StackPanel>
+
+                    <ScrollViewer>
+                        <UniformGrid Columns="1">
+                            <GroupBox Header="正弦曲线">
+                                <Viewbox Grid.Row="1">
+                                    <echart:StaticCurveChartPlotter DataSource="{Binding CollectionData}" MaxValueY="400" MinValueY="0" Background="White" 
+                                                        Foreground="Black" FontSize="12"
+                                                        IsLegendVisible="True" DataSourceChangeBegionStory="False"
+                                                        MaxValueX="{Binding MaxValueBig}" MinValueX="{Binding MinValueBig}" Width="800" Height="200" >
+                                        <echart:StaticCurveChartPlotter.SplitItemYs>
+                                            <echart:SplitItem Color="DarkGray" Value="400" Text="400 " />
+                                            <echart:SplitItem Color="DarkGray" Value="350" Text="350 " />
+                                            <echart:SplitItem Color="DarkGray" Value="300" Text="300 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="250" Text="250 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="200" Text="200 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="150" Text="150 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="100" Text="100 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="50" Text="50 "/>
+                                            <echart:SplitItem Color="DarkGray" Value="0" Text="0 "/>
+
+                                            <echart:SplitItem Color="Red" Value="340"  Text="340m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Orange" Value="200" Text="200m" SpliteType="HeighLight" Group="身高"  IsShowTrangle="True" ></echart:SplitItem>
+
+                                            <echart:SplitItem Color="Blue" Value="150" Text="150kg" SpliteType="HeighLight"  Group="体重" IsShowTrangle="True"/>
+                                            <echart:SplitItem Color="Purple" Value="80"  Text="80kg"  SpliteType="HeighLight"  Group="体重"  IsShowTrangle="True" />
+
+                                        </echart:StaticCurveChartPlotter.SplitItemYs>
+
+                                    </echart:StaticCurveChartPlotter>
+                                </Viewbox>
+                            </GroupBox>
+                        </UniformGrid>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
             <TabItem Header="平面网格(待定)"/>
             <TabItem Header="等值线(待定)"/>
         </TabControl>

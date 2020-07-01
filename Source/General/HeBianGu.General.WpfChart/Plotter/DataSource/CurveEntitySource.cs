@@ -38,11 +38,14 @@ namespace HeBianGu.WPF.EChart
             set { _markTextVisbleLeight = value; }
         }
 
+        /// <summary> 标识当前曲线是否显示向下动画 </summary>
+        public bool IsAnimal { get; set; } = true;
+
         public override void Draw(CurveChartPlotter chart)
         {
             List<ShapePointMarker> es = new List<ShapePointMarker>();
 
-            var ps = chart.TryFindResource("DefaultCurvePath") as Style;
+            var ps = IsAnimal ? chart.TryFindResource("DefaultCurvePath") as Style : chart.TryFindResource("SingleCurvePath") as Style;
             var ms = chart.TryFindResource("DefaultMarker") as Style;
 
             var ts = chart.TryFindResource("XCenterLable") as Style;

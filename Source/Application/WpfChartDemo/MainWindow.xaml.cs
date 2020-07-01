@@ -65,5 +65,10 @@ namespace WpfChartDemo
         {
             PrintProvider.PrintGrid(this.grid_all);
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this._vm.RelayCommand.Execute("RangeChanged");
+        }
     }
 }

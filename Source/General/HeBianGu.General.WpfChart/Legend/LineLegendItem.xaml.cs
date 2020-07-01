@@ -27,7 +27,7 @@ namespace HeBianGu.WPF.EChart
 
             this.Color = c.Color;
             this.Text = c.Text;
-            this.Marker = c.Marker.Clone();
+            this.Marker = c.Marker?.Clone();
 
             this.Checked += LineLegendItem_Checked;
             this.Unchecked += LineLegendItem_Checked;
