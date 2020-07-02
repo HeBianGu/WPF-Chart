@@ -509,27 +509,6 @@ xmlns:wpfapp10="clr-namespace:WpfApp10"
                 </Grid>
             </TabItem>
 
-            <TabItem Header="曲线视图（多数据）">
-                <Grid Background="Black">
-                    <Image Stretch="Fill" x:Name="image"/>
-                    <GroupBox Header="显示效果" Width="Auto" Height="Auto" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Right" Margin="20,0" Padding="10,6">
-                        <StackPanel TextBlock.FontSize="16" >
-                            <RadioButton Content="0.1" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="0.2" Checked="RadioButton_Checked"  Foreground="White" IsChecked="True"/>
-                            <RadioButton Content="0.4" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="0.8" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="1.2" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="1.4" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="1.6" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="2" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="3" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="4" Checked="RadioButton_Checked" Foreground="White"/>
-                            <RadioButton Content="5" Checked="RadioButton_Checked" Foreground="White"/>
-                        </StackPanel>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-
             <TabItem Header="平面网格(待定)"/>
             <TabItem Header="等值线(待定)"/>
         </TabControl>
