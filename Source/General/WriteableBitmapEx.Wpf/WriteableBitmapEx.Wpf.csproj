@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net40</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DisableImplicitFrameworkReferences Condition="'$(TargetFramework)'=='net40'">true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net40'">
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;WPF</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <OutputPath>..\..\Build\Release\</OutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)'=='Release|net40'">
+    <DocumentationFile>..\..\Build\Release\WriteableBitmapEx.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Compile Include="..\Common\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    <Compile Include="..\WriteableBitmapEx\BitmapContext.cs" Link="BitmapContext.cs" />
+    <Compile Include="..\WriteableBitmapEx\BitmapFactory.cs" Link="BitmapFactory.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapAntialiasingExtensions.cs" Link="WriteableBitmapAntialiasingExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapBaseExtensions.cs" Link="WriteableBitmapBaseExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapBlitExtensions.cs" Link="WriteableBitmapBlitExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapContextExtensions.cs" Link="WriteableBitmapContextExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapConvertExtensions.cs" Link="WriteableBitmapConvertExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapFillExtensions.cs" Link="WriteableBitmapFillExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapFilterExtensions.cs" Link="WriteableBitmapFilterExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapLineExtensions.cs" Link="WriteableBitmapLineExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapShapeExtensions.cs" Link="WriteableBitmapShapeExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapSplineExtensions.cs" Link="WriteableBitmapSplineExtensions.cs" />
+    <Compile Include="..\WriteableBitmapEx\WriteableBitmapTransformationExtensions.cs" Link="WriteableBitmapTransformationExtensions.cs" />
+  </ItemGroup>
+
+</Project>

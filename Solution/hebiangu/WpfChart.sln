@@ -17,6 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{7919
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDrawingBrushDemo", "..\..\Source\Application\WpfDrawingBrushDemo\WpfDrawingBrushDemo.csproj", "{75A24108-1140-4342-911D-FE958FEAA056}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WriteableBitmapEx.Wpf", "..\..\Source\General\WriteableBitmapEx.Wpf\WriteableBitmapEx.Wpf.csproj", "{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfWriteableBitmap", "..\..\Source\Application\WpfWriteableBitmap\WpfWriteableBitmap.csproj", "{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.WriteableBitmap", "..\..\Source\General\HeBianGu.General.WriteableBitmap\HeBianGu.General.WriteableBitmap.csproj", "{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +49,18 @@ Global
 		{75A24108-1140-4342-911D-FE958FEAA056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A24108-1140-4342-911D-FE958FEAA056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75A24108-1140-4342-911D-FE958FEAA056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +71,9 @@ Global
 		{24346D80-6C07-4CA3-AA9F-05A37F8DB275} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
 		{C2280400-0E7B-4829-90A7-9C1348C9A3DA} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
 		{75A24108-1140-4342-911D-FE958FEAA056} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
+		{EBDA6E7C-C366-4651-B8D0-DB92DE88BD80} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
+		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
+		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CD86719-0967-40D7-89A5-1A62313FCC61}
