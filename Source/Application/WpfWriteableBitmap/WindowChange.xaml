@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfWriteableBitmap.WindowChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfWriteableBitmap"
+        mc:Ignorable="d"
+        Title="WindowChange" Height="650" Width="1100">
+    <Grid Background="Black">
+        <Image Stretch="Fill" x:Name="image"/>
+
+        <GroupBox Header="显示效果" Width="Auto" Height="Auto" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Right" Margin="20,0" Padding="10,6">
+            <!--<StackPanel TextBlock.FontSize="16" >
+                <RadioButton Content="ToCos" Checked="RadioButton_Checked" Foreground="White"/>
+                <RadioButton Content="ToLine" Checked="RadioButton_Checked" Foreground="White"/>
+            </StackPanel>-->
+
+            <ListBox x:Name="list" SelectionChanged="list_SelectionChanged">
+                <ListBox.Resources>
+                    <DataTemplate DataType="{x:Type local:Fx}">
+                        <CheckBox Content="{Binding Name}" Margin="0,6" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected}"/>
+                    </DataTemplate>
+                </ListBox.Resources>
+            </ListBox>
+        </GroupBox>
+    </Grid>
+</Window>

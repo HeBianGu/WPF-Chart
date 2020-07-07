@@ -186,5 +186,19 @@ namespace WpfWriteableBitmap
 
 
         }
+
+        private void RadioButton_Change_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton radio = sender as RadioButton;
+
+            if(radio.Content.ToString()=="Sin")
+            {
+
+            }
+            else if (radio.Content.ToString() == "Cos")
+            {
+
+            }
+        }
     }
 }
