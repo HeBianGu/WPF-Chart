@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.WpfChart", "..\..\Source\General\HeBianGu.General.WpfChart\HeBianGu.General.WpfChart.csproj", "{6B96C2E8-856F-4417-8127-CAFC2B71917C}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfWriteableBitmap", "..\..\Source\Application\WpfWriteableBitmap\WpfWriteableBitmap.csproj", "{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.General.WriteableBitmap", "..\..\Source\General\HeBianGu.General.WriteableBitmap\HeBianGu.General.WriteableBitmap.csproj", "{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMath", "..\..\Source\Application\WpfMath\WpfMath.csproj", "{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{75A24108-1140-4342-911D-FE958FEAA056} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
 		{D5B0A1AD-412D-400B-8B20-76DFEFFEEF8B} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
 		{BE2F05A9-E4D3-4F17-946E-55D1D9AF3F29} = {79195BF1-9154-43CC-B9BB-E49A7CF318C2}
+		{1E2A4E11-9023-4B36-BB6A-0C78F8055A5E} = {2E73A1A3-8586-419B-B900-BA49D6CDF752}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CD86719-0967-40D7-89A5-1A62313FCC61}
