@@ -10,4 +10,18 @@
         <Button Content="refresh" Click="MainWindow_Loaded"/>
         <Image x:Name="im"/>
     </DockPanel>
+    <Window.Resources>
+        <Style TargetType="Ellipse">
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!--<Canvas x:Name="CC" >
+    </Canvas>-->
 </Window>
