@@ -2,6 +2,7 @@
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,99 +53,58 @@ namespace WpfMath
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             WriteableBitmap writeableBitmap = new WriteableBitmap(500, 500, 96, 96, PixelFormats.Bgr32, null);
-            this.im.Source = writeableBitmap;
-            //Int32Rect rect = new Int32Rect(0, 0, (int)Width, Height);
-
-            //using (writeableBitmap.GetBitmapContext())
-
-            /// byte[] pixels = new byte[(int)Width * Height * Source.Format.BitsPerPixel / 8];
-            /// 
-
-            //  Do ：强度半径
-
             List<PointPower> pointPowers = new List<PointPower>();
             pointPowers.Add(new PointPower() { Point = new Point(250, 250), Power = 255 });
-            pointPowers.Add(new PointPower() { Point = new Point(50, 30), Power = 100 });
-            pointPowers.Add(new PointPower() { Point = new Point(300, 200), Power = 100 });
-            pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 100 });
+            pointPowers.Add(new PointPower() { Point = new Point(50, 30), Power = 150 });
+            //pointPowers.Add(new PointPower() { Point = new Point(400, 200), Power = 100 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 150 });
+            //pointPowers.Add(new PointPower() { Point = new Point(0, 300), Power = 100 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 100 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 100 });
 
+            for (int i = 0; i < 3; i++)
+            {
+                var pp = new PointPower();
+                pp.Point = new Point(Random.Shared.Next(0, 500), Random.Shared.Next(0, 500));
+                pp.Power = Random.Shared.Next(255);
+                pointPowers.Add(pp);
+            }
 
-            byte rTop = 50;
-            //double p1 = 255;
-            //double p2 = 200;
-            //double[] targetPoint1 = new double[] { 250, 250 };
-            //double[] targetPoint2 = new double[] { 50, 30 };
+            double totolValue = 1;
             for (int y = 0; y < writeableBitmap.PixelHeight; y++)
             {
                 for (int x = 0; x < writeableBitmap.PixelWidth; x++)
                 {
-                    //pixels[pixelOffset] = (byte)blue;
-                    //pixels[pixelOffset + 1] = (byte)green;
-                    //pixels[pixelOffset + 2] = (byte)red;
-                    //pixels[pixelOffset + 3] = (byte)alpha;
-
                     double[] xy = new double[] { x, y };
                     var ds = pointPowers.Select(x =>
                     {
-                        double d = Distance.Euclidean(xy, new double[] { x.Point.X, x.Point.Y });
-                        d = 1 - d / x.Power;
-                        d = d < 0.0 ? (byte)0 : (byte)(d * rTop);
-                        return d;
+                        double cd = Distance.Euclidean(xy, new double[] { x.Point.X, x.Point.Y });
+                        //cd = Math.Sqrt(cd);
+                        //d = 1 - d / x.Power;
+                        //d = d < 0.0 ? (byte)0 : (byte)(d * rTop);
+                        return Math.Max(x.Power - cd, 0);
                     });
-                    //double d = Distance.SAD(xy, targetPoint);
-                    //d = Distance.SSD(xy, targetPoint);
-                    //d = Distance.MSE(xy, targetPoint);
-                    //double d1 = Distance.Euclidean(xy, targetPoint1);
-                    //double d2 = Distance.Euclidean(xy, targetPoint2);
-                    //d = Distance.Minkowski(3, xy, targetPoint);
-                    //d = Distance.Canberra(xy, targetPoint);
-                    //d = Math.Sqrt(d);
-                    //d1 = 1 - d1 / p1;
-                    //d2 = 1 - d2 / p2;
-
-                    //d1 = d1 < 0.0 ? (byte)0 : (byte)(d1 * 255);
-                    //d2 = d2 < 0.0 ? (byte)0 : (byte)(d2 * 255);
-                    //double d = (d1 + d2) / 2;
-                    double d = ds.Sum();
+                    double d = ds.Sum() / totolValue;
                     byte alpha = 255;
-                    byte red = (byte)d;
-                    byte green = (byte)d;
-                    byte blue = 0;
-
-                    byte[] ColorData = { blue, 0, red, alpha }; // B G R
-
+                    byte red = (byte)(d > 255 * 255 * 255 ? 255 : Math.Max(d - 255 * 255, 0));
+                    byte blue = red > 0 ? (byte)0 : (byte)(d > 255 * 255 ? 255 : Math.Max(d - 255, 0));
+                    byte green = red > 0 || blue > 0 ? (byte)0 : (byte)(d > 255 ? 255 : d - 255);
+                    byte[] ColorData = { blue, green, red, alpha }; // B G R
                     Int32Rect rect = new Int32Rect(x, y, 1, 1);
                     writeableBitmap.WritePixels(rect, ColorData, 4, 0);
-
-
-
-                    //int weight = x;
-                    //int height = y;
-
-                    ////red = (int)((double)height / Source.PixelWidth * 255);
-                    ////green = rand.Next(100, 255);
-                    ////blue = (int)((double)weight / wb.PixelHeight * 255);
-                    //alpha = 50;
-
-                    //foreach (var item in this.Brushs)
-                    //{
-                    //    item.Draw(weight, height, ref red, ref green, ref blue);
-                    //}
-
-                    //int pixelOffset = (x + y * Source.PixelWidth) * Source.Format.BitsPerPixel / 8;
-
-                    //pixels[pixelOffset] = (byte)blue;
-                    //pixels[pixelOffset + 1] = (byte)green;
-                    //pixels[pixelOffset + 2] = (byte)red;
-                    //pixels[pixelOffset + 3] = (byte)alpha;
-
                 }
-
-                //int stride = (Source.PixelWidth * Source.Format.BitsPerPixel) / 8;
-
-                //writeableBitmap.WritePixels(rect, pixels, stride, 0);
-
             }
+
+            foreach (var item in pointPowers)
+            {
+                writeableBitmap.WritePixels(new Int32Rect((int)item.Point.X, (int)item.Point.Y, 1, 1), new byte[] { 255, 255, 255, 255 }, 4, 0);
+            }
+
+            this.im.Source = writeableBitmap;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

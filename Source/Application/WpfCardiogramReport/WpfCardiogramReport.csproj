@@ -118,13 +118,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\General\HeBianGu.General.WpfChart\HeBianGu.General.WpfChart.csproj">
-      <Project>{6b96c2e8-856f-4417-8127-cafc2b71917c}</Project>
-      <Name>HeBianGu.General.WpfChart</Name>
-    </ProjectReference>
+    <None Include="Resources\心电图.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\心电图.txt" />
+    <ProjectReference Include="..\..\General\HeBianGu.General.WriteableBitmap\HeBianGu.General.WriteableBitmap.csproj">
+      <Project>{be2f05a9-e4d3-4f17-946e-55d1d9af3f29}</Project>
+      <Name>HeBianGu.General.WriteableBitmap</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

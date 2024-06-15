@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfMath"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Button Content="refresh" Click="MainWindow_Loaded"/>
         <Image x:Name="im"/>
-    </Grid>
+    </DockPanel>
 </Window>
