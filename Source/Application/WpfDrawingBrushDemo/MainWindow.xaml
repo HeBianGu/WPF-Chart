@@ -37,6 +37,9 @@
             <TabItem Header="平面网格">
                 <Image Source="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow}, Path=PlanarGridBitmap.Source}" />
             </TabItem>
+            <TabItem Header="热力图">
+                <Image x:Name="im_heat"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

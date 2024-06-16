@@ -1,4 +1,5 @@
 ﻿using HeBianGu.General.DrawingBrush;
+using MathNet.Numerics;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Window = System.Windows.Window;
 
 namespace WpfDrawingBrushDemo
 {
@@ -34,7 +36,7 @@ namespace WpfDrawingBrushDemo
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new Action(() => InitCollection()));
             this.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new Action(() => InitPlanarGridBitmap()));
-
+            this.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new Action(() => InitHeatMapBitmap()));
         }
 
         public ObservableCollection<LinearBitmap> LinearWriteableBitmaps
@@ -132,6 +134,78 @@ namespace WpfDrawingBrushDemo
 
         }
 
+        public void InitHeatMapBitmap()
+        {
+            Random random = new Random();
+            List<PointPower> pointPowers = new List<PointPower>();
+            //pointPowers.Add(new PointPower() { Point = new Point(30, 30), Power = 25 });
+            //pointPowers.Add(new PointPower() { Point = new Point(10, 20), Power = 15 });
+            //pointPowers.Add(new PointPower() { Point = new Point(400, 200), Power = 10 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 15 });
+            //pointPowers.Add(new PointPower() { Point = new Point(0, 300), Power = 10 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 10 });
+            //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 10 });
+            int w = 50;
+            int h = 50;
+
+            int mapWidth = 1000;
+            int mapHeight = 1000;
+
+            for (int i = 0; i < 20; i++)
+            {
+                var pp = new PointPower();
+                pp.Point = new Point(random.Next(0, w), random.Next(0, h));
+                pp.Power = random.Next(50);
+                pointPowers.Add(pp);
+            }
+
+            Func<double, double, double> getDistance = (x, y) =>
+            {
+                double[] xy = new double[] { x, y };
+                var ds = pointPowers.Select(l =>
+                {
+                    //double cd = Distance.SSD(xy, new double[] { x.Point.X, x.Point.Y });
+                    //cd= Math.Sqrt(cd);
+                    double cd = Distance.Euclidean(xy, new double[] { l.Point.X, l.Point.Y });
+                    return Math.Max(l.Power - cd, 0);
+                });
+                return ds.Sum();
+            };
+
+           
+            PlanarGridBitmap planar = new PlanarGridBitmap(mapWidth, mapHeight);
+            PlanarGridBrush brush = new PlanarGridBrush();
+
+
+            double[,] values = new double[w, h];
+            List<double> maps = new List<double>();
+
+            for (int i = 0; i < w; i++)
+            {
+                for (int j = 0; j < h; j++)
+                {
+                    //values[i, j] = (20 - Math.Abs((i - 20))) * (20 - Math.Abs((j - 20)));
+                    values[i, j] = getDistance(i, j);
+                    maps.Add(values[i, j]);
+                }
+            }
+
+            double min = maps.Min(x => x);
+            double max = maps.Max(x => x);
+
+            brush.Values = values;
+            brush.ItemHeigh = mapWidth / w;
+            brush.ItemWidth = mapHeight / h;
+            brush.MaxColor = Color.FromArgb(255, 255, 0, 0);
+            brush.MinColor = Color.FromArgb(255, 255, 255, 0);
+            brush.MaxValue = max;
+            brush.MinValue = min;
+            planar.Brushs.Add(brush);
+            planar.Draw();
+            //PlanarGridBitmap = planar;
+            im_heat.Source = planar.Source;
+        }
+
         public PlanarGridBitmap PlanarGridBitmap
         {
             get { return (PlanarGridBitmap)GetValue(PlanarGridBitmapProperty); }
@@ -150,5 +224,12 @@ namespace WpfDrawingBrushDemo
 
              }));
 
+    }
+
+    public class PointPower
+    {
+        public Point Point { get; set; }
+
+        public double Power { get; set; }
     }
 }

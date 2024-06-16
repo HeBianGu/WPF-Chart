@@ -33,7 +33,7 @@ namespace HeBianGu.General.DrawingBrush.Bitmap
         {
             Int32Rect rect = new Int32Rect(0, 0, (int)Width, Height);
 
-            byte[] pixels = new byte[(int)Width * Height * Source.Format.BitsPerPixel / 8];
+            byte[] pixels = new byte[(long)Width * Height * Source.Format.BitsPerPixel / 8];
 
             for (int y = 0; y < Source.PixelHeight; y++)
             {
