@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
@@ -20,6 +21,26 @@ using Window = System.Windows.Window;
 
 namespace WpfMath
 {
+    public class ListCout : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this.GetValues();
+        }
+
+        private IEnumerable<int> GetValues()
+        {
+            yield return 1;
+            yield return 5;
+            yield return 10;
+            yield return 20;
+            yield return 50;
+            yield return 100;
+            yield return 500;
+            yield return 1000;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -64,10 +85,54 @@ namespace WpfMath
         }
 
 
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public int Count
         {
-            WriteableBitmap writeableBitmap = new WriteableBitmap(500, 500, 96, 96, PixelFormats.Bgra32, null);
+            get { return (int)GetValue(CountProperty); }
+            set { SetValue(CountProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CountProperty =
+            DependencyProperty.Register("Count", typeof(int), typeof(MainWindow), new FrameworkPropertyMetadata(50, (d, e) =>
+            {
+                MainWindow control = d as MainWindow;
+
+                if (control == null) return;
+
+                if (e.OldValue is int o)
+                {
+
+                }
+
+                if (e.NewValue is int n)
+                {
+
+                }
+
+            }));
+
+
+        public double SAD(double[] a, double[] b)
+        {
+            if (a.Length != b.Length)
+            {
+                throw new ArgumentException("All vectors must have the same dimensionality.");
+            }
+
+            double num = 0.0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                num += Math.Abs(a[i] - b[i]);
+            }
+
+            return num;
+        }
+
+
+
+        public void Build(Func<byte, byte[]> buildPixel, int a = 255, int count = 50, int w = 500, int h = 500)
+        {
+            WriteableBitmap writeableBitmap = new WriteableBitmap(w, h, 96, 96, PixelFormats.Bgra32, null);
             List<PointPower> pointPowers = new List<PointPower>();
             //pointPowers.Add(new PointPower() { Point = new Point(250, 250), Power = 25 });
             //pointPowers.Add(new PointPower() { Point = new Point(50, 30), Power = 15 });
@@ -76,76 +141,56 @@ namespace WpfMath
             //pointPowers.Add(new PointPower() { Point = new Point(0, 300), Power = 10 });
             //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 10 });
             //pointPowers.Add(new PointPower() { Point = new Point(100, 300), Power = 10 });
-
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < count; i++)
             {
                 var pp = new PointPower();
-                pp.Point = new Point(Random.Shared.Next(0, 500), Random.Shared.Next(0, 500));
-                pp.Power = Random.Shared.Next(120);
+                pp.Point = new Point(Random.Shared.Next(0, w), Random.Shared.Next(0, h));
+                pp.Power = Random.Shared.Next(200);
                 pointPowers.Add(pp);
             }
 
-            double totolValue = 1;
+            Func<double, double, double> getDistance = (x, y) =>
+            {
+                double[] xy = new double[] { x, y };
+                var ds = pointPowers.Select(x =>
+                {
+                    //double cd = Distance.SSD(xy, new double[] { x.Point.X, x.Point.Y });
+                    //cd= Math.Sqrt(cd);
+
+                    double cd = Distance.Euclidean(xy, new double[] { x.Point.X, x.Point.Y });
+                    return Math.Max(x.Power - cd, 0);
+                });
+                return ds.Sum();
+            };
+
+            List<double> maps = new List<double>();
             for (int y = 0; y < writeableBitmap.PixelHeight; y++)
             {
                 for (int x = 0; x < writeableBitmap.PixelWidth; x++)
                 {
-                    double[] xy = new double[] { x, y };
-                    var ds = pointPowers.Select(x =>
-                    {
-                        double cd = Distance.Euclidean(xy, new double[] { x.Point.X, x.Point.Y });
-                        //cd = Math.Sqrt(cd);
-                        //d = 1 - d / x.Power;
-                        //d = d < 0.0 ? (byte)0 : (byte)(d * rTop);
-                        return Math.Max(x.Power - cd, 0);
-                    });
-                    double d = ds.Sum() / totolValue;
-                    byte alpha = (byte)(d > 255 ? 255 : d - 255);
-                    byte red = 0;
-                    byte blue = 0;
-                    byte green = 0;
-                    if (d > 255 * 255 * 255)
-                    {
-                        red = 255;
-                    }
-                    else if (d > 255 * 255)
-                    {
-                        red = (byte)Math.Max(d - 255 * 255, 0);
-                    }
-                    else if (d > 255)
-                    {
-                        blue = (byte)Math.Max(d - 255 , 0);
-                    }
-                    else 
-                    {
-                        green = (byte)d;
-                    }
-                    //byte red = (byte)(d > 255 * 255 * 255 ? 255 : Math.Max(d - 255 * 255, 0));
-                    //byte blue = red > 0 ? (byte)0 : (byte)(d > 255 * 255 ? 0 : Math.Max(d - 255, 0));
-                    //byte green = red > 0 || blue > 0 ? (byte)0 : (byte)(d > 0 ? 255 : d);
-                    byte[] ColorData = { 0, 255, 0, alpha }; // B G R
-                    byte[] ColorData1 = { 0, 0, 255, 255 }; // B G R
-                    byte[] ColorData2 = { 0, 0, 0, 255 }; // B G R
-
-                    Int32Rect rect = new Int32Rect(x, y, 1, 1);
-
-                    //if (alpha == 50)
-                    //    writeableBitmap.WritePixels(rect, new byte[] { 255, 255, 0, 255 }, 4, 0);
-                    //else if (alpha == 40)
-                    //    writeableBitmap.WritePixels(rect, new byte[] { 255, 0, 255, 255 }, 4, 0);
-                    //else if (alpha == 30)
-                    //    writeableBitmap.WritePixels(rect, new byte[] { 0, 255, 255, 255 }, 4, 0);
-                    //else if (alpha == 20)
-                    //    writeableBitmap.WritePixels(rect, new byte[] { 255, 0, 0, 255 }, 4, 0);
-                    //else if (alpha == 10)
-                    //    writeableBitmap.WritePixels(rect, new byte[] { 0, 255, 0, 255 }, 4, 0);
-                    if (alpha % 20 == 0)
-                        writeableBitmap.WritePixels(rect, new byte[] { 100, 100, 100, 100 }, 4, 0);
-                    else
-                        writeableBitmap.WritePixels(rect, ColorData, 4, 0);
+                    maps.Add(getDistance.Invoke(x, y));
                 }
             }
 
+            double min = maps.Min(x => x);
+            double max = maps.Max(x => x);
+
+            Func<double, byte> func = x =>
+            {
+                double p = (x - min) / (max - min);
+                return (byte)(p * a);
+            };
+
+            for (int y = 0; y < writeableBitmap.PixelHeight; y++)
+            {
+                for (int x = 0; x < writeableBitmap.PixelWidth; x++)
+                {
+                    byte alpha = func.Invoke(getDistance.Invoke(x, y));
+                    Int32Rect rect = new Int32Rect(x, y, 1, 1);
+                    var bs = buildPixel?.Invoke(alpha);
+                    writeableBitmap.WritePixels(rect, bs, 4, 0);
+                }
+            }
             //foreach (var item in pointPowers)
             //{
             //    writeableBitmap.WritePixels(new Int32Rect((int)item.Point.X, (int)item.Point.Y, 1, 1), new byte[] { 255, 255, 255, 255 }, 4, 0);
@@ -154,9 +199,141 @@ namespace WpfMath
             this.im.Source = writeableBitmap;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                return new byte[] { 0, 0, 255, alpha };
+            }, 255, this.Count);
+        }
+
+        private void btn1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                if (alpha > 200)
+                {
+                    return new byte[] { 0, 0, 255, alpha };
+                }
+                else if (alpha > 150)
+                {
+                    return new byte[] { 0, 255, 255, alpha };
+                }
+                else if (alpha > 100)
+                {
+                    return new byte[] { 0, 255, 0, alpha };
+                }
+                else if (alpha > 50)
+                {
+                    return new byte[] { 255, 255, 0, alpha };
+                }
+                else
+                {
+                    return new byte[] { 255, 0, 0, alpha };
+                }
+            }, 255, this.Count);
+        }
+
+        private void btn2_Click(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                if (alpha > 150)
+                {
+                    return new byte[] { 0, 0, 255, alpha };
+                }
+                else if (alpha > 100)
+                {
+                    return new byte[] { 0, 255, 255, alpha };
+                }
+                else if (alpha > 50)
+                {
+                    return new byte[] { 0, 255, 0, alpha };
+                }
+                else
+                {
+                    return new byte[] { 255, 0, 0, alpha };
+                }
+            }, 200, this.Count);
+        }
+
+        private void btn3_Click(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                if (alpha == 200)
+                {
+                    return new byte[] { 0, 0, 255, alpha };
+                }
+                else if (alpha == 150)
+                {
+                    return new byte[] { 0, 255, 255, alpha };
+                }
+                else if (alpha == 100)
+                {
+                    return new byte[] { 0, 255, 0, alpha };
+                }
+                else if (alpha == 50)
+                {
+                    return new byte[] { 255, 255, 0, alpha };
+                }
+                else
+                {
+                    return new byte[] { 255, 0, 0, alpha };
+                }
+            }, 255, this.Count);
+        }
+
+        private void btn4_Click(object sender, RoutedEventArgs e)
         {
 
+            this.Build(alpha =>
+            {
+                if (alpha % 50 == 0)
+                    return new byte[] { 150, 150, 150, 255 };
+                return new byte[] { 0, 0, 255, alpha };
+            }, 255, this.Count);
+        }
+
+        private void btn5_Click(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                var a = alpha * 5;
+                if (a < 255)
+                    return new byte[] { (byte)a, 0, 0, alpha };//蓝 B
+                else if (a < 255 * 2)
+                    return new byte[] { 255, (byte)(a - 255), 0, alpha };//青 B G
+                else if (a < 255 * 3)
+                    return new byte[] { (byte)(255 * 3 - a), 255, 0, alpha };//绿 G
+                else if (a < 255 * 4)
+                    return new byte[] { 0, 255, (byte)(a - 255 * 3), alpha };//黄  G R
+                else if (a < 255 * 5)
+                    return new byte[] { 0, (byte)(255 * 5 - a), 255, alpha };//红 R
+                else
+                    return new byte[] { 0, 0, 255, alpha };
+            }, 255, this.Count);
+        }
+
+        private void btn6_Click(object sender, RoutedEventArgs e)
+        {
+            this.Build(alpha =>
+            {
+                var a = alpha * 5;
+                if (a < 255)
+                    return new byte[] { (byte)a, 0, 0, (byte)(alpha + 30) };//蓝 B
+                else if (a < 255 * 2)
+                    return new byte[] { 255, (byte)(a - 255), 0, (byte)(alpha + 30) };//青 B G
+                else if (a < 255 * 3)
+                    return new byte[] { (byte)(255 * 3 - a), 255, 0, alpha };//绿 G
+                else if (a < 255 * 4)
+                    return new byte[] { 0, 255, (byte)(a - 255 * 3), alpha };//黄  G R
+                else if (a < 255 * 5)
+                    return new byte[] { 0, (byte)(255 * 5 - a), 255, alpha };//红 R
+                else
+                    return new byte[] { 0, 0, 255, 255 };
+            }, 255, this.Count);
         }
     }
 

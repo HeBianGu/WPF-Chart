@@ -4,11 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMath"
-        mc:Ignorable="d"
+        mc:Ignorable="d" x:Name="w"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <Button Content="refresh" Click="MainWindow_Loaded"/>
-        <Image x:Name="im"/>
+        <DockPanel DockPanel.Dock="Top">
+            <Button x:Name="btn1" Content="refresh1" Click="btn1_Click"/>
+            <Button x:Name="btn2" Content="refresh2" Click="btn2_Click"/>
+            <Button x:Name="btn3" Content="refresh3" Click="btn3_Click"/>
+            <Button x:Name="btn4" Content="refresh4" Click="btn4_Click"/>
+            <Button x:Name="btn5" Content="refresh5" Click="btn5_Click"/>
+            <Button x:Name="btn6" Content="refresh6" Click="btn6_Click"/>
+            <ComboBox ItemsSource="{local:ListCout}" SelectedItem="{Binding ElementName=w,Path=Count}">
+            </ComboBox>
+        </DockPanel>
+
+        <Grid>
+            <!--<Border Background="White">
+                <TextBlock Text="ssss" FontSize="500"/>
+            </Border>-->
+            <Image x:Name="im" Stretch="Fill"/>
+        </Grid>
+
     </DockPanel>
     <Window.Resources>
         <Style TargetType="Ellipse">
